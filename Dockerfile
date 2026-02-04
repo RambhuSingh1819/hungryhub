@@ -1,5 +1,5 @@
 i
-# Use Java 17 base image
+# Use Java 21  base image
 FROM eclipse-temurin:17-jdk-alpine
 
 # Set working directory
@@ -12,7 +12,7 @@ COPY . .
 RUN ./mvnw clean package -DskipTests
 
 # Expose port
-EXPOSE 8080
+EXPOSE 8185
 
 # Run the jar
 CMD ["java", "-jar", "target/*.jar"]
