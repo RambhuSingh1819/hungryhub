@@ -1,19 +1,20 @@
-# Use Java 21 base image
-FROM eclipse-temurin:21-jdk-alpine
-
-# Set working directory
+# ---------- BUILD STAGE ----------
+FROM eclipse-temurin:21-jdk AS build
 WORKDIR /app
 
-# Copy project files
 COPY . .
-
-# Build the application
 RUN ./mvnw clean package -DskipTests
 
-# Expose port 8080
+# ---------- RUN STAGE ----------
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+
+# Copy the built jar from build stage
+COPY --from=build /app/target/*.jar app.jar
+
 EXPOSE 8080
 
-# Run the Spring Boot jar
-CMD ["java", "-jar", "target/*.jar"]
+CMD ["java", "-jar", "app.jar"]
+
 
 
