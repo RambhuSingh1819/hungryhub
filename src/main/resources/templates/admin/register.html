@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Registration - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-auth">
+<div class="auth-container">
+    <div class="auth-card register-card">
+        <!-- Icon + heading -->
+        <div class="register-icon">🛠️</div>
+        <h2 class="register-title">Admin Registration</h2>
+        <p class="register-subtitle">
+            Create a secure admin account to manage menu items, orders and payments for your food delivery platform.
+        </p>
+
+        <!-- Server / JS message area -->
+        <div id="message" class="message" style="display:none;"></div>
+
+        <form id="adminRegisterForm">
+            <!-- FULL NAME -->
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <!-- EMAIL + OTP INLINE (ACTIVE) -->
+            <div class="form-group form-group-inline">
+                <div class="form-group-inner">
+                    <label>Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="otp-btn-wrapper">
+                    <button type="button"
+                            class="btn btn-sm otp-btn"
+                            onclick="sendEmailOtp()">
+                        Send OTP
+                    </button>
+                    <span id="emailOtpStatus" class="otp-status"></span>
+                </div>
+            </div>
+
+            <div class="form-group" id="emailOtpGroup" style="display: none;">
+                <label>Email OTP</label>
+                <input type="text" id="emailOtp" name="emailOtp" maxlength="6">
+            </div>
+
+            <!-- PHONE (NO OTP NOW) -->
+            <div class="form-group">
+                <label>Phone Number (optional)</label>
+                <input type="tel" id="phoneNumber" name="phoneNumber">
+            </div>
+
+            <!-- PHONE + OTP INLINE (DISABLED / COMMENTED) -->
+            <!--
+            <div class="form-group form-group-inline">
+                <div class="form-group-inner">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                </div>
+                <div class="otp-btn-wrapper">
+                    <button type="button"
+                            class="btn btn-sm otp-btn"
+                            onclick="sendPhoneOtp()">
+                        Send OTP
+                    </button>
+                    <span id="phoneOtpStatus" class="otp-status"></span>
+                </div>
+            </div>
+
+            <div class="form-group" id="phoneOtpGroup" style="display: none;">
+                <label>Phone OTP</label>
+                <input type="text" id="phoneOtp" name="phoneOtp" maxlength="6">
+            </div>
+            -->
+
+            <!-- PASSWORD -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block">
+                Register
+            </button>
+        </form>
+
+        <p class="auth-bottom-text">
+            Already have an account?
+            <a th:href="@{/admin/login}">Login here</a>
+        </p>
+    </div>
+</div>
+
+<script th:src="@{/js/admin-auth.js}"></script>
+</body>
+</html>

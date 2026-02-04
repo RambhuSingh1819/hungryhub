@@ -1,0 +1,3551 @@
+/* =========================================================*/
+
+/* ================= HOME PAGE VISIBILITY FIX ================= */
+
+/* Force homepage content visible */
+.hero-left,
+.hero-right,
+.section {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+
+
+
+/*========================================================= */
+
+/* ---------- CSS RESET ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- ROOT VARIABLES ---------- */
+:root {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --danger: #ef4444;
+  --success: #22c55e;
+
+  --radius: 14px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- BODY ---------- */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ---------- LINKS ---------- */
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- CONTAINER ---------- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+/* ---------- NAVBAR ---------- */
+.navbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.nav-brand {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-links a {
+  font-weight: 600;
+  color: #334155;
+}
+
+/* ---------- BUTTONS ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-outline-light {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  color: var(--text);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  padding: 80px 0;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.hero-title {
+  font-size: clamp(2.2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  color: var(--muted);
+  margin: 16px 0 22px;
+  max-width: 520px;
+}
+
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.hero-badge {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  background: #f1f5f9;
+  border: 1px solid #e5e7eb;
+}
+
+/* ---------- HERO ACTIONS ---------- */
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.hero-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- HERO STATS ---------- */
+.hero-stats {
+  display: flex;
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.hero-stat-number {
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.hero-stat-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---------- HERO CARD ---------- */
+.hero-card {
+  background: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid #e5e7eb;
+}
+
+.hero-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.hero-chip {
+  background: #dcfce7;
+  color: #166534;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+/* ---------- SECTIONS ---------- */
+.section {
+  padding: 72px 0;
+}
+
+.section-header {
+  margin-bottom: 36px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 900;
+}
+
+.section-subtitle {
+  color: var(--muted);
+  max-width: 520px;
+}
+
+/* ---------- FEATURES ---------- */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.feature-card {
+  padding: 24px;
+  border-radius: var(--radius);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--shadow-sm);
+}
+
+.feature-icon {
+  font-size: 1.6rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- AUTH ---------- */
+.auth-container {
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px;
+  background: #ffffff;
+}
+
+.auth-card {
+  width: 100%;
+  padding: 32px;
+  border-radius: var(--radius-lg);
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: var(--shadow-md);
+}
+
+/* ---------- FORMS ---------- */
+.form-group {
+  margin-bottom: 14px;
+}
+
+label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  font-size: 0.9rem;
+  background: #ffffff;
+  color: var(--text);
+}
+
+/* ---------- FOOTER ---------- */
+.footer {
+  padding: 24px 0;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--muted);
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+/* =========================================================
+   INDUSTRY POLISH ADD-ON (LIGHT MODE – PRODUCTION SAFE)
+========================================================= */
+
+/* ---------- GLOBAL SMOOTHNESS ---------- */
+body {
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ---------- HERO MOTION POLISH ---------- */
+.hero {
+  position: relative;
+}
+
+/* ---------- HERO BADGE INTERACTION ---------- */
+.hero-badge {
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.hero-badge:hover {
+  transform: translateY(-2px);
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+/* ---------- CTA TACTILE FEEL ---------- */
+.hero-cta {
+  will-change: transform;
+  transition:
+    transform 160ms cubic-bezier(.2,.9,.3,1),
+    box-shadow 160ms cubic-bezier(.2,.9,.3,1);
+}
+
+.hero-cta:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(37,99,235,0.35);
+}
+
+.hero-cta:active {
+  transform: translateY(0) scale(0.96);
+}
+
+/* ---------- HERO STATS MICRO INTERACTION ---------- */
+.hero-stat-number {
+  transition: transform 160ms ease, color 160ms ease;
+}
+
+.hero-stat-number:hover {
+  transform: scale(1.05);
+  color: #2563eb;
+}
+
+/* ---------- HERO CARD PREMIUM MOTION ---------- */
+.hero-card {
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+@media (hover: hover) {
+  .hero-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 22px 44px rgba(0,0,0,0.18);
+  }
+}
+
+/* ---------- HERO CARD CONTENT CLARITY ---------- */
+.hero-card-items {
+  color: #334155;
+}
+
+/* ---------- SECTION SCROLL FADE ---------- */
+/*.section,
+.hero-left,
+.hero-right {
+  opacity: 0;
+  transform: translateY(14px);
+}
+*/
+
+
+/* ================= SAFE REVEAL SYSTEM ================= */
+
+/* Default: visible */
+.section,
+.hero-left,
+.hero-right {
+  opacity: 1;
+  transform: none;
+}
+.section.reveal,
+.hero-left.reveal,
+.hero-right.reveal {
+  animation: revealFade 560ms cubic-bezier(.2,.9,.3,1) forwards;
+}
+
+@keyframes revealFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- TOUCH DEVICE OPTIMIZATION ---------- */
+@media (hover: none) {
+  .hero-badge:hover,
+  .hero-cta:hover,
+  .hero-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .hero-badge,
+  .hero-card,
+  .hero-cta {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+
+
+
+/* =========================================================
+   USER LOGIN PAGE – CLEAN LIGHT MODE (PRODUCTION READY)
+========================================================= */
+
+/* ---------- AUTH BACKGROUND ---------- */
+.auth-container {
+  position: relative;
+  background:
+    radial-gradient(700px 360px at 10% 10%, rgba(59,130,246,0.08), transparent 40%),
+    radial-gradient(700px 360px at 90% 90%, rgba(251,191,36,0.10), transparent 45%);
+}
+
+/* ---------- LOGIN CARD ---------- */
+.login-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.12);
+  animation: loginFadeUp 520ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* ---------- LOGIN ICON ---------- */
+.login-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+  box-shadow: 0 12px 26px rgba(245,158,11,0.35);
+}
+
+/* ---------- TITLES ---------- */
+.login-title {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.login-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+/* ---------- INPUT POLISH ---------- */
+.login-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.login-card input:focus {
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+}
+
+/* ---------- FORM FOOTER ---------- */
+.form-footer-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 14px;
+}
+
+.link-small {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.link-small:hover {
+  text-decoration: underline;
+}
+
+/* ---------- LOGIN BUTTON ---------- */
+.login-card .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.login-card .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.login-card .btn-primary:hover::after {
+  animation: shine 0.9s ease forwards;
+}
+
+/* ---------- MESSAGE ---------- */
+.login-card .message {
+  border-radius: 12px;
+  animation: fadeMessage 360ms ease both;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes loginFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeMessage {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .login-card {
+    padding: 26px;
+  }
+
+  .login-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .login-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   USER REGISTER PAGE – CLEAN LIGHT MODE (PRODUCTION READY)
+========================================================= */
+
+/* ---------- REGISTER CARD ---------- */
+.auth-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 26px 52px rgba(0,0,0,0.12);
+  animation: registerFadeUp 520ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* ---------- TITLE ---------- */
+.auth-card h1 {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+/* ---------- INLINE OTP GROUP ---------- */
+.inline-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+/* ---------- OTP BUTTON ---------- */
+.inline-button .btn-secondary {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 24px rgba(37,99,235,0.28);
+  transition: transform .16s ease, box-shadow .16s ease;
+}
+
+.inline-button .btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(37,99,235,0.38);
+}
+
+/* ---------- REGISTER BUTTON ---------- */
+.auth-card .btn-primary {
+  margin-top: 12px;
+  width: 100%;
+}
+
+/* ---------- ALERT / MESSAGE ---------- */
+.alert {
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+  animation: fadeMessage 320ms ease both;
+}
+
+.alert-success {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #bbf7d0;
+}
+
+.alert-danger {
+  background: #fef2f2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+}
+
+/* ---------- FOOTER TEXT ---------- */
+.auth-footer-text {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.auth-footer-text a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- INPUT POLISH ---------- */
+.auth-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.auth-card input:focus {
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes registerFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .inline-group {
+    grid-template-columns: 1fr;
+  }
+
+  .inline-button {
+    margin-top: 6px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .auth-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD PAGE – CLEAN LIGHT MODE (PRODUCTION READY)
+========================================================= */
+
+/* ---------- FORGOT CARD ---------- */
+.forgot-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+  animation: forgotFadeUp 520ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* ---------- ICON ---------- */
+.forgot-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #c7d2fe, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(99,102,241,0.35);
+}
+
+/* ---------- TITLES ---------- */
+.forgot-title {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.forgot-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+/* ---------- INPUT POLISH ---------- */
+.forgot-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.forgot-card input:focus {
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+}
+
+/* ---------- BUTTON ---------- */
+.forgot-card .btn-primary {
+  margin-top: 6px;
+  width: 100%;
+}
+
+/* ---------- ERROR MESSAGE ---------- */
+.forgot-card .message.error {
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  animation: fadeMessage 320ms ease both;
+}
+
+/* ---------- FOOTER ---------- */
+.forgot-footer-text {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.forgot-footer-text a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes forgotFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .forgot-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .forgot-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   RESET PASSWORD PAGE – CLEAN LIGHT MODE (PRODUCTION READY)
+========================================================= */
+
+/* ---------- RESET CARD ---------- */
+.reset-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 24px 50px rgba(0,0,0,0.12);
+  animation: resetFadeUp 520ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+/* ---------- ICON ---------- */
+.reset-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  background: linear-gradient(135deg, #a7f3d0, #22c55e);
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(34,197,94,0.35);
+}
+
+/* ---------- TITLES ---------- */
+.reset-title {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.reset-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+/* ---------- INPUT MICRO INTERACTION ---------- */
+.reset-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.reset-card input:focus {
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+}
+
+/* ---------- BUTTON ---------- */
+.reset-card .btn-primary {
+  margin-top: 8px;
+  width: 100%;
+}
+
+/* ---------- ERROR MESSAGE ---------- */
+.reset-card .message.error {
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background: #fef2f2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  animation: fadeMessage 320ms ease both;
+}
+
+/* ---------- FOOTER ---------- */
+.reset-footer-text {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.reset-footer-text a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.reset-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes resetFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .reset-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.6rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .reset-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   MENU PAGE – CLEAN LIGHT MODE UI (PRODUCTION READY)
+========================================================= */
+
+/* ---------- MENU HERO ---------- */
+.menu-hero {
+  background:
+    radial-gradient(900px 300px at 10% 10%, rgba(251,191,36,0.14), transparent 45%),
+    radial-gradient(900px 400px at 90% 80%, rgba(59,130,246,0.14), transparent 50%);
+  border-radius: 0 0 28px 28px;
+}
+
+.menu-title {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  font-weight: 900;
+}
+
+.menu-subtitle {
+  color: var(--muted);
+  max-width: 520px;
+}
+
+/* ---------- CATEGORY CHIPS ---------- */
+.category-chips {
+  gap: 10px;
+}
+
+.category-chip {
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-weight: 700;
+  transition:
+    transform 140ms ease,
+    box-shadow 140ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
+}
+
+.category-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.category-chip.active {
+  background: #2563eb;
+  color: #ffffff;
+  border-color: #2563eb;
+}
+
+/* ---------- SEARCH BAR ---------- */
+.menu-search-bar input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.menu-search-bar input:focus {
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* ---------- MENU GRID ---------- */
+.menu-grid {
+  margin-top: 26px;
+}
+
+/* ---------- MENU CARD ---------- */
+.menu-item {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+  animation: menuFadeUp 420ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+.menu-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+}
+
+/* ---------- IMAGE ZOOM ---------- */
+.menu-item img {
+  transition: transform 320ms cubic-bezier(.2,.9,.3,1);
+}
+
+.menu-item:hover img {
+  transform: scale(1.06);
+}
+
+/* ---------- TEXT ---------- */
+.menu-item h3 {
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.menu-item p {
+  min-height: 42px;
+  color: var(--muted);
+}
+
+/* ---------- PRICE ---------- */
+.price {
+  font-size: 1.2rem;
+  font-weight: 900;
+  letter-spacing: .02em;
+  color: #22c55e;
+}
+
+/* ---------- ADD TO CART ---------- */
+.menu-item .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.menu-item .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.35),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.menu-item .btn-primary:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes menuFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 700px) {
+  .menu-hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .menu-search-bar {
+    flex-direction: column;
+  }
+
+  .menu-search-bar button {
+    width: 100%;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .menu-item {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   CART PAGE – CLEAN LIGHT MODE UI (PRODUCTION READY)
+========================================================= */
+
+/* ---------- CART HERO ---------- */
+.cart-hero {
+  background:
+    radial-gradient(900px 300px at 10% 10%, rgba(251,191,36,0.14), transparent 45%),
+    radial-gradient(900px 400px at 90% 80%, rgba(34,197,94,0.14), transparent 50%);
+  border-radius: 0 0 28px 28px;
+}
+
+.cart-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 900;
+}
+
+.cart-subtitle {
+  color: var(--muted);
+  max-width: 520px;
+}
+
+/* ---------- CHECKOUT STEPS ---------- */
+.cart-steps {
+  display: flex;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.cart-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.45;
+}
+
+.cart-step.active {
+  opacity: 1;
+}
+
+.cart-step-number {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fde68a;
+  font-weight: 800;
+  color: #78350f;
+}
+
+.cart-step-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+/* ---------- CART HERO CARD ---------- */
+.cart-hero-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.cart-hero-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #bbf7d0;
+  color: #065f46;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+/* ---------- CART ITEM ---------- */
+.cart-item {
+  position: relative;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  animation: cartFadeUp 360ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+.cart-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.10);
+}
+
+/* ---------- QTY BUTTON ---------- */
+.qty-btn {
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+.qty-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,.12);
+}
+
+.qty-btn:active {
+  transform: scale(.94);
+}
+
+/* ---------- REMOVE BUTTON ---------- */
+.cart-item .btn-danger {
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+.cart-item .btn-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(239,68,68,.30);
+}
+
+/* ---------- EMPTY CART ---------- */
+.empty-cart {
+  animation: fadeMessage 360ms ease both;
+}
+
+.empty-cart-illustration {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- SUMMARY CARD ---------- */
+.cart-summary-card {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 18px;
+  box-shadow: 0 10px 26px rgba(0,0,0,0.08);
+  animation: cartFadeUp 420ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+.cart-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.cart-summary-total {
+  font-weight: 900;
+  font-size: 1.1rem;
+}
+
+/* ---------- CHECKOUT BUTTON ---------- */
+.cart-checkout-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-checkout-btn::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.35),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.cart-checkout-btn:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- MODAL ---------- */
+.modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+  animation: modalFadeUp 320ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+@keyframes modalFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ---------- TOAST ---------- */
+#cartToast {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  z-index: 2400;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes cartFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 900px) {
+  .cart-hero-inner {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .cart-steps {
+    flex-wrap: wrap;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .cart-item,
+  .cart-summary-card,
+  .modal-content {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   ORDERS PAGE – CLEAN LIGHT MODE UI (PRODUCTION READY)
+========================================================= */
+
+/* ---------- ORDERS HERO ---------- */
+.orders-hero {
+  background:
+    radial-gradient(900px 320px at 10% 10%, rgba(59,130,246,0.14), transparent 45%),
+    radial-gradient(900px 400px at 90% 80%, rgba(34,197,94,0.14), transparent 50%);
+  border-radius: 0 0 28px 28px;
+}
+
+.orders-title {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 900;
+}
+
+.orders-subtitle {
+  color: var(--muted);
+  max-width: 520px;
+}
+
+/* ---------- HERO CARD ---------- */
+.orders-hero-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.orders-hero-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #bfdbfe;
+  color: #1e3a8a;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+/* ---------- ORDER CARD ---------- */
+.order-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  padding: 14px;
+  margin-bottom: 14px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+  animation: orderFadeUp 360ms cubic-bezier(.2,.9,.3,1) both;
+}
+
+.order-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 32px rgba(0,0,0,0.10);
+}
+
+/* ---------- HEADER ---------- */
+.order-header h3 {
+  font-weight: 800;
+}
+
+.order-meta {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- STATUS BADGES ---------- */
+.order-status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  letter-spacing: .04em;
+}
+
+/* status colors */
+.status-pending {
+  background: #fde68a;
+  color: #78350f;
+}
+
+.status-preparing {
+  background: #bfdbfe;
+  color: #1e3a8a;
+}
+
+.status-completed {
+  background: #bbf7d0;
+  color: #065f46;
+}
+
+.status-cancelled {
+  background: #fecaca;
+  color: #7f1d1d;
+}
+
+/* ---------- ORDER ITEMS ---------- */
+.order-items {
+  margin-top: 10px;
+  border-top: 1px dashed #e5e7eb;
+  padding-top: 10px;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* ---------- FOOTER ---------- */
+.order-footer {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+.order-footer p {
+  margin: 4px 0;
+}
+
+.order-payment {
+  margin-top: 8px;
+}
+
+/* ---------- EMPTY STATE ---------- */
+.empty-state {
+  animation: fadeMessage 360ms ease both;
+}
+
+.empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes orderFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 800px) {
+  .orders-hero-inner {
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .order-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .order-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+
+
+
+/* =========================================================
+   USER DASHBOARD – CLEAN LIGHT MODE UI (PRODUCTION READY)
+========================================================= */
+
+/* ---------- DASHBOARD HERO ---------- */
+.dashboard-hero {
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59,130,246,0.14), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(34,197,94,0.14), transparent 50%);
+  border-radius: 0 0 28px 28px;
+  position: relative;
+}
+
+/* ---------- LAYOUT ---------- */
+.dashboard-hero-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 42px;
+  align-items: center;
+}
+
+/* ---------- LEFT CONTENT ---------- */
+.dashboard-hero-left {
+  animation: dashboardFadeUp 420ms ease both;
+}
+
+.dashboard-greeting {
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.dashboard-title {
+  font-size: clamp(2rem, 3.5vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 12px;
+}
+
+.dashboard-subtitle {
+  max-width: 520px;
+  font-size: 1rem;
+  color: var(--muted);
+  margin-bottom: 22px;
+}
+
+.dashboard-quick-actions {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.dashboard-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- RIGHT STATS CARD ---------- */
+.dashboard-hero-right {
+  animation: dashboardFadeUp 520ms ease both;
+}
+
+.dashboard-stats-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.dashboard-stats-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 42px rgba(0,0,0,0.14);
+}
+
+.dashboard-stats-card h3 {
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+/* ---------- STATS GRID ---------- */
+.dashboard-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.dashboard-stat {
+  text-align: center;
+  padding: 14px;
+  border-radius: 14px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.dashboard-stat-number {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #2563eb;
+}
+
+.dashboard-stat-label {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.dashboard-stat-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* ---------- RECOMMENDED SECTION ---------- */
+.dashboard-menu-section {
+  padding: 48px 0 30px;
+}
+
+.dashboard-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.dashboard-section-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+}
+
+.dashboard-section-subtitle {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.dashboard-view-all-link {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.dashboard-view-all-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- REVEAL ANIMATION ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: dashboardReveal 360ms ease forwards;
+}
+
+.reveal:nth-child(1) { animation-delay: .05s; }
+.reveal:nth-child(2) { animation-delay: .12s; }
+.reveal:nth-child(3) { animation-delay: .18s; }
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes dashboardFadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes dashboardReveal {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .dashboard-hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .dashboard-quick-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* =========================================================
+   ADMIN DASHBOARD – CLEAN ENTERPRISE LIGHT UI
+   (CSS ONLY | SAFE TO PASTE)
+========================================================= */
+
+/* ---------- ADMIN PAGE BASE ---------- */
+.admin-page {
+  padding: 36px 0 60px;
+}
+
+/* ---------- ADMIN HERO (SERIOUS BUT LIGHT) ---------- */
+body .dashboard-hero {
+  background:
+    radial-gradient(900px 380px at 10% -10%, rgba(148,163,184,0.16), transparent 45%),
+    radial-gradient(900px 380px at 90% 10%, rgba(59,130,246,0.16), transparent 45%);
+}
+
+/* ---------- ADMIN GREETING ---------- */
+.admin-page .dashboard-greeting {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ---------- ADMIN STATS CARD ---------- */
+.admin-page .dashboard-stats-card {
+  border-left: 4px solid #2563eb;
+}
+
+.admin-page .dashboard-stat-number {
+  color: #2563eb;
+}
+
+/* ---------- ADMIN MAIN ---------- */
+.admin-main {
+  margin-top: 36px;
+}
+
+/* ---------- TABLE WRAPPER ---------- */
+.admin-table-wrapper {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+  animation: adminFadeUp 360ms ease both;
+}
+
+/* ---------- TITLE ROW ---------- */
+.admin-table-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.admin-table-title-row h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* ---------- SEARCH INPUT ---------- */
+.admin-search-input {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
+  outline: none;
+  min-width: 220px;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.admin-search-input::placeholder {
+  color: #94a3b8;
+}
+
+.admin-search-input:focus {
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.18);
+}
+
+/* ---------- ADMIN ORDER CARD ---------- */
+.admin-page .order-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 14px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.10);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.admin-page .order-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(0,0,0,0.14);
+}
+
+/* ---------- ADMIN ORDER HEADER ---------- */
+.admin-page .order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.admin-page .order-header h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+
+/* ---------- ADMIN STATUS BADGE ---------- */
+.admin-page .order-status {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+
+/* ---------- PAYMENT BADGES ---------- */
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.badge-success {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-warning {
+  background: #fde68a;
+  color: #78350f;
+}
+
+.badge-danger {
+  background: #fee2e2;
+  color: #7f1d1d;
+}
+
+/* ---------- ADMIN ACTION LINK ---------- */
+.table-action-btn {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: #2563eb;
+  transition: transform .14s ease, color .14s ease;
+}
+
+.table-action-btn:hover {
+  transform: translateX(4px);
+  color: #1d4ed8;
+}
+
+/* ---------- EMPTY STATE ---------- */
+.admin-page .empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  animation: adminFadeUp 300ms ease both;
+}
+
+.admin-page .empty-state-icon {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes adminFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .admin-table-title-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .admin-search-input {
+    width: 100%;
+  }
+
+  .admin-page .order-header {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .admin-table-wrapper,
+  .admin-page .order-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   ADMIN ORDERS PAGE – CLEAN ENTERPRISE LIGHT UI
+   (CSS ONLY | SAFE TO PASTE)
+========================================================= */
+
+/* ---------- ORDERS PAGE WRAPPER ---------- */
+.orders-page {
+  margin-top: 28px;
+}
+
+/* ---------- FILTER CHIPS ---------- */
+.admin-filter-chip {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform .14s ease,
+    box-shadow .14s ease,
+    background-color .14s ease;
+}
+
+.admin-filter-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+}
+
+.admin-filter-chip.active {
+  background: linear-gradient(135deg, #2563eb, #3b82f6);
+  color: #ffffff;
+  border-color: transparent;
+  box-shadow: 0 10px 26px rgba(37,99,235,.35);
+}
+
+/* ---------- ORDER CARD (ADMIN) ---------- */
+.orders-page .order-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 18px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.12);
+  animation: adminOrderFadeUp .35s ease both;
+}
+
+.orders-page .order-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.16);
+}
+
+/* ---------- HEADER ---------- */
+.orders-page .order-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
+.orders-page .order-header h3 {
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+/* ---------- META ---------- */
+.orders-page .order-meta {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---------- STATUS ---------- */
+.orders-page .order-status {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+/* ---------- INFO TEXT ---------- */
+.orders-page p {
+  font-size: 0.9rem;
+  margin: 4px 0;
+}
+
+/* ---------- ORDER ITEMS ---------- */
+.orders-page .order-items {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.orders-page .order-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.88rem;
+  margin: 4px 0;
+}
+
+/* ---------- FOOTER ---------- */
+.orders-page .order-footer {
+  margin-top: 10px;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* ---------- ACTIONS ---------- */
+.order-actions {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+/* ---------- SELECT ---------- */
+.order-actions select {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.order-actions select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.18);
+}
+
+/* ---------- TIME INPUT ---------- */
+.order-actions input[type="number"] {
+  padding: 9px 12px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.order-actions input:focus {
+  outline: none;
+  border-color: #2563eb;
+}
+
+/* ---------- SET TIME BUTTON ---------- */
+.set-time-btn {
+  white-space: nowrap;
+  font-weight: 800;
+  transition: transform .14s ease, box-shadow .14s ease;
+}
+
+.set-time-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 26px rgba(37,99,235,.35);
+}
+
+/* ---------- EMPTY STATE ---------- */
+.orders-page .empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  animation: adminOrderFadeUp .3s ease both;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes adminOrderFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .order-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .orders-page .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .orders-page .order-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   ADMIN – FOOD ITEMS MANAGEMENT (LIGHT MODE / ENTERPRISE)
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- ADMIN PAGE HEADER ---------- */
+.admin-title {
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+  font-weight: 900;
+  margin-bottom: 6px;
+}
+
+.admin-subtitle {
+  max-width: 620px;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* ---------- ADMIN CHIP CARD ---------- */
+.admin-chip-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.12);
+  animation: adminFadeUp .35s ease both;
+}
+
+.admin-chip {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fde68a, #facc15);
+  color: #78350f;
+  font-weight: 800;
+  font-size: 0.75rem;
+  margin-bottom: 6px;
+}
+
+/* ---------- SEARCH INPUT ---------- */
+.admin-search-input {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  color: #0f172a;
+  min-width: 260px;
+  transition:
+    border-color .16s ease,
+    box-shadow .16s ease,
+    transform .16s ease;
+}
+
+.admin-search-input::placeholder {
+  color: #94a3b8;
+}
+
+.admin-search-input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 10px 26px rgba(37,99,235,.18);
+}
+
+/* ---------- ADMIN FOOD CARD ---------- */
+.admin-food-card {
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+  animation: adminCardFade .35s ease both;
+}
+
+.admin-food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 60px rgba(0,0,0,0.16);
+}
+
+/* ---------- IMAGE ---------- */
+.admin-food-card img {
+  transition: transform .35s ease;
+}
+
+.admin-food-card:hover img {
+  transform: scale(1.06);
+}
+
+/* ---------- TEXT ---------- */
+.admin-food-card h3 {
+  font-weight: 900;
+  letter-spacing: .01em;
+}
+
+.admin-food-card .cart-item-desc {
+  font-size: 0.9rem;
+  color: var(--muted);
+  min-height: 44px;
+}
+
+/* ---------- PRICE ---------- */
+.admin-food-card .price {
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #22c55e;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.admin-food-card .table-action-btn {
+  transition:
+    transform .14s ease,
+    box-shadow .14s ease;
+}
+
+.admin-food-card .table-action-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.15);
+}
+
+.admin-food-card .table-action-btn-danger:hover {
+  box-shadow: 0 10px 22px rgba(239,68,68,.35);
+}
+
+/* ---------- ADD ITEM BUTTON ---------- */
+.admin-page .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-page .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.admin-page .btn-primary:hover::after {
+  animation: shine .8s ease forwards;
+}
+
+/* ---------- MODAL ENHANCEMENT ---------- */
+#itemModal .modal-content {
+  max-width: 520px;
+  border-radius: 16px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.18);
+  animation: modalFadeUp .3s ease both;
+}
+
+#itemModal h2 {
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+/* ---------- IMAGE PREVIEW ---------- */
+#imagePreview {
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  animation: fadeMessage .25s ease both;
+}
+
+/* ---------- EMPTY STATE ---------- */
+.admin-page .empty-state {
+  animation: fadeMessage .35s ease both;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes adminFadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes adminCardFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 800px) {
+  .admin-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .admin-chip-card {
+    width: 100%;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .admin-food-card,
+  .admin-chip-card,
+  #itemModal .modal-content {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   ADMIN SUBSCRIPTION / PAYMENT PAGE – LIGHT MODE (PRODUCTION)
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- PAGE WRAPPER ---------- */
+.admin-page,
+.container {
+  position: relative;
+}
+
+/* ---------- PAYMENT CARD ---------- */
+.payment-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 28px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 28px 70px rgba(0,0,0,0.14);
+  animation: payFadeUp 0.4s ease both;
+}
+
+/* ---------- TITLE ---------- */
+.card h1 {
+  font-size: 1.9rem;
+  font-weight: 900;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+/* ---------- INTRO TEXT ---------- */
+.card p {
+  color: #475569;
+  font-size: 0.95rem;
+}
+
+/* ---------- PLAN BOX ---------- */
+.plan-box {
+  margin-top: 22px;
+  padding: 20px;
+  border-radius: 18px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  box-shadow: 0 18px 36px rgba(34,197,94,0.22);
+}
+
+/* ---------- PLAN TITLE ---------- */
+.plan-box h2 {
+  font-size: 1.4rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #065f46;
+}
+
+/* ---------- PRICE ---------- */
+.plan-box .price {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #22c55e;
+  margin-bottom: 10px;
+}
+
+/* ---------- FEATURES ---------- */
+.plan-box ul {
+  padding-left: 18px;
+  margin-top: 8px;
+}
+
+.plan-box li {
+  font-size: 0.9rem;
+  margin: 6px 0;
+  color: #334155;
+}
+
+/* ---------- PAY BUTTON ---------- */
+#adminPayBtn {
+  width: 100%;
+  margin-top: 26px;
+  font-size: 1.05rem;
+  font-weight: 800;
+  padding: 14px;
+  border-radius: 999px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #ffffff;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* Shine animation */
+#adminPayBtn::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+#adminPayBtn:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+#adminPayBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px rgba(34,197,94,0.45);
+}
+
+#adminPayBtn:active {
+  transform: scale(0.97);
+}
+
+/* ---------- PAYMENT MESSAGE / TOAST ---------- */
+#adminPayToast {
+  margin-top: 18px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+  animation: fadeMessage 0.3s ease both;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes payFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .card {
+    padding: 22px;
+  }
+
+  .plan-box .price {
+    font-size: 1.7rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  #adminPayBtn {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   PAYMENT SUCCESS PAGE – LIGHT MODE CELEBRATION UI
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- WRAPPER ---------- */
+.payment-success {
+  max-width: 520px;
+  margin: 80px auto;
+  padding: 36px 28px;
+  text-align: center;
+  border-radius: 24px;
+  position: relative;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+
+  animation: successFadeUp 0.4s ease both;
+}
+
+/* ---------- SUCCESS ICON ---------- */
+.success-icon {
+  width: 88px;
+  height: 88px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: #065f46;
+
+  background: linear-gradient(135deg, #bbf7d0, #22c55e);
+  box-shadow:
+    0 0 0 10px rgba(34,197,94,0.18),
+    0 18px 40px rgba(34,197,94,0.35);
+
+  animation: successPop 0.45s ease both;
+}
+
+/* ---------- TITLE ---------- */
+.payment-success h1 {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+/* ---------- TEXT ---------- */
+.payment-success p {
+  font-size: 0.95rem;
+  color: #475569;
+}
+
+/* ---------- TRANSACTION INFO ---------- */
+.payment-success strong {
+  color: #16a34a;
+}
+
+/* ---------- ACTION BUTTONS ---------- */
+.payment-success .btn {
+  min-width: 180px;
+  font-weight: 800;
+}
+
+/* ---------- PRIMARY BUTTON ---------- */
+.payment-success .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-success .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.payment-success .btn-primary:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- SUBTLE CONFETTI (LIGHT MODE SAFE) ---------- */
+.payment-success::after {
+  content: "✨ 🎉 ✨";
+  position: absolute;
+  inset: 0;
+  font-size: 1.6rem;
+  opacity: 0;
+  animation: confettiLight 1.2s ease forwards;
+  pointer-events: none;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes successFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes successPop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes confettiLight {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .payment-success {
+    margin: 40px 16px;
+    padding: 26px 20px;
+  }
+
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    font-size: 2.2rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .payment-success,
+  .success-icon {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   ADMIN LOGIN – LIGHT MODE ENTERPRISE UI
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- ADMIN AUTH BACKGROUND ---------- */
+.auth-container {
+  background:
+    radial-gradient(900px 400px at 15% 10%, rgba(59,130,246,0.12), transparent 45%),
+    radial-gradient(900px 400px at 85% 90%, rgba(239,68,68,0.08), transparent 45%);
+}
+
+/* ---------- ADMIN LOGIN CARD ---------- */
+.auth-card {
+  max-width: 420px;
+  margin: auto;
+  position: relative;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 18px;
+  padding: 32px;
+
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+  animation: adminLoginFade 0.35s ease both;
+}
+
+/* ---------- HEADING ---------- */
+.auth-card h2 {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 18px;
+  color: #0f172a;
+}
+
+/* ---------- FORM INPUTS ---------- */
+.auth-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #0f172a;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.auth-card input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* ---------- LOGIN BUTTON ---------- */
+.auth-card .btn-primary {
+  margin-top: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle shine */
+.auth-card .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.auth-card .btn-primary:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- LINKS ---------- */
+.auth-card a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-card a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- MESSAGE / ERROR ---------- */
+#message {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  animation: adminMsgFade 0.25s ease both;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes adminLoginFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes adminMsgFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 26px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .auth-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   ADMIN FORGOT PASSWORD – LIGHT MODE ENTERPRISE UI
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- BACKGROUND CONTEXT ---------- */
+.auth-container {
+  background:
+    radial-gradient(900px 420px at 15% 12%, rgba(99,102,241,0.12), transparent 45%),
+    radial-gradient(900px 420px at 85% 90%, rgba(239,68,68,0.08), transparent 45%);
+}
+
+/* ---------- CARD ---------- */
+.auth-card {
+  max-width: 440px;
+  margin: auto;
+  position: relative;
+
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 32px;
+
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+  animation: adminForgotFade 0.35s ease both;
+}
+
+/* ---------- TITLE ---------- */
+.auth-title {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 8px;
+  color: #0f172a;
+}
+
+/* ---------- SUBTITLE ---------- */
+.auth-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 22px;
+}
+
+/* ---------- INPUT ---------- */
+.auth-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #0f172a;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.auth-card input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+
+/* ---------- BUTTON ---------- */
+.auth-card .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle shine */
+.auth-card .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.auth-card .btn-primary:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- ERROR MESSAGE ---------- */
+.message.error {
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  font-size: 0.9rem;
+  animation: adminMsgFade 0.25s ease both;
+}
+
+/* ---------- FOOTER ---------- */
+.auth-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.auth-footer a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes adminForgotFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes adminMsgFade {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .auth-card {
+    padding: 26px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .auth-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   ADMIN RESET PASSWORD – LIGHT MODE ENTERPRISE UI
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- BACKGROUND CONTEXT ---------- */
+.auth-container {
+  background:
+    radial-gradient(900px 420px at 12% 10%, rgba(34,197,94,0.12), transparent 45%),
+    radial-gradient(900px 420px at 88% 90%, rgba(59,130,246,0.10), transparent 45%);
+}
+
+/* ---------- RESET CARD ---------- */
+.reset-card {
+  max-width: 460px;
+  margin: auto;
+  position: relative;
+
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 32px;
+
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+  animation: adminResetFade 0.35s ease both;
+}
+
+/* ---------- TITLE ---------- */
+.reset-card .auth-title {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+/* ---------- SUBTITLE ---------- */
+.reset-card .auth-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 22px;
+}
+
+/* ---------- INPUT ---------- */
+.reset-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #0f172a;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.reset-card input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: #22c55e;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.15);
+}
+
+/* ---------- RESET BUTTON ---------- */
+.reset-card .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle shine */
+.reset-card .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.reset-card .btn-primary:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- ERROR MESSAGE ---------- */
+.reset-card .message.error {
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background: #fee2e2;
+  color: #7f1d1d;
+  border: 1px solid #fecaca;
+  font-size: 0.9rem;
+  animation: adminResetMsg 0.25s ease both;
+}
+
+/* ---------- FOOTER ---------- */
+.reset-card .auth-footer {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.reset-card .auth-footer a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.reset-card .auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- ANIMATIONS ---------- */
+@keyframes adminResetFade {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes adminResetMsg {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .reset-card {
+    padding: 26px;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .reset-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   ADMIN REGISTER PAGE – LIGHT MODE ENTERPRISE UI
+   CSS ONLY | SAFE TO COPY-PASTE
+========================================================= */
+
+/* ---------- REGISTER CARD ---------- */
+.register-card {
+  max-width: 460px;
+  margin: auto;
+  position: relative;
+
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #e5e7eb;
+  padding: 32px;
+
+  box-shadow: 0 30px 70px rgba(0,0,0,0.15);
+  animation: adminRegisterFadeUp 0.35s ease both;
+}
+
+/* ---------- ICON ---------- */
+.register-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  margin: 0 auto 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.7rem;
+  font-weight: 800;
+
+  background: #fde68a;
+  color: #78350f;
+
+  box-shadow: 0 14px 30px rgba(245,158,11,.35);
+}
+
+/* ---------- TITLES ---------- */
+.register-title {
+  text-align: center;
+  font-weight: 900;
+  margin-bottom: 6px;
+  color: #0f172a;
+}
+
+.register-subtitle {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 22px;
+}
+
+/* ---------- FORM GROUP INLINE ---------- */
+.form-group-inline {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.form-group-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- OTP BUTTON ---------- */
+.otp-btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.otp-btn {
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+
+  background: #2563eb;
+  color: #ffffff;
+  border: none;
+
+  box-shadow: 0 10px 22px rgba(37,99,235,.30);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.otp-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(37,99,235,.40);
+}
+
+.otp-btn:active {
+  transform: scale(.96);
+}
+
+/* ---------- OTP STATUS ---------- */
+.otp-status {
+  font-size: 0.72rem;
+  color: #16a34a;
+}
+
+/* ---------- INPUT ---------- */
+.register-card input {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  color: #0f172a;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    transform 160ms ease;
+}
+
+.register-card input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+}
+
+/* ---------- REGISTER BUTTON ---------- */
+.register-card .btn-primary {
+  margin-top: 14px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* subtle shine */
+.register-card .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: linear-gradient(
+    120deg,
+    transparent 40%,
+    rgba(255,255,255,0.45),
+    transparent 60%
+  );
+  transform: translateX(-120%);
+}
+
+.register-card .btn-primary:hover::after {
+  animation: shine 0.8s ease forwards;
+}
+
+/* ---------- MESSAGE ---------- */
+.register-card .message {
+  margin-bottom: 14px;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  animation: fadeMessage 0.25s ease both;
+}
+
+/* ---------- FOOTER ---------- */
+.auth-bottom-text {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: #64748b;
+}
+
+.auth-bottom-text a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-bottom-text a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- ANIMATION ---------- */
+@keyframes adminRegisterFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------- MOBILE ---------- */
+@media (max-width: 600px) {
+  .form-group-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .otp-btn {
+    width: 100%;
+  }
+
+  .register-icon {
+    width: 56px;
+    height: 56px;
+    font-size: 1.5rem;
+  }
+}
+
+/* ---------- REDUCED MOTION ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .register-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   FINAL AUTH NAMESPACE + LIGHT MODE OVERRIDE (CLEAN)
+   MUST BE LAST IN style.css
+========================================================= */
+
+/* ================= GLOBAL BASE ================= */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ================= USER AUTH ================= */
+
+.user-auth .auth-container {
+  background:
+    radial-gradient(800px 400px at 10% 10%, rgba(251,191,36,0.10), transparent 40%),
+    radial-gradient(900px 500px at 90% 90%, rgba(59,130,246,0.12), transparent 45%);
+}
+
+.user-auth .auth-card,
+.user-auth .login-card,
+.user-auth .register-card,
+.user-auth .forgot-card,
+.user-auth .reset-card {
+  max-width: 420px;
+  margin: auto;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 18px 44px rgba(0,0,0,0.12);
+}
+
+/* Allow subtle animation only for user */
+.user-auth .login-icon,
+.user-auth .register-icon,
+.user-auth .forgot-icon,
+.user-auth .reset-icon {
+  animation: iconFloat 3.5s ease-in-out infinite;
+}
+
+/* ================= ADMIN AUTH ================= */
+
+.admin-auth .auth-container {
+  background:
+    radial-gradient(900px 420px at 15% 12%, rgba(59,130,246,0.12), transparent 45%),
+    radial-gradient(900px 420px at 85% 90%, rgba(239,68,68,0.10), transparent 45%);
+}
+
+.admin-auth .auth-card,
+.admin-auth .register-card,
+.admin-auth .reset-card {
+  max-width: 460px;
+  margin: auto;
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 22px 56px rgba(0,0,0,0.14);
+}
+
+/* Stronger focus for admin security */
+.admin-auth input:focus {
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.28);
+}
+
+/* No playful animations in admin */
+.admin-auth .login-icon,
+.admin-auth .register-icon,
+.admin-auth .forgot-icon,
+.admin-auth .reset-icon {
+  animation: none;
+}
+
+/* ================= LIGHT MODE SURFACES ONLY ================= */
+
+/* Cards that were previously glass/dark */
+.auth-card,
+.login-card,
+.register-card,
+.reset-card,
+.forgot-card,
+.dashboard-stats-card,
+.admin-table-wrapper,
+.order-card,
+.payment-success {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 28px rgba(0,0,0,0.08);
+  backdrop-filter: none;
+}
+
+/* ================= TEXT NORMALIZATION ================= */
+
+.hero-subtitle,
+.dashboard-subtitle,
+.section-subtitle,
+.auth-subtitle,
+.order-meta,
+.cart-subtitle {
+  color: #475569;
+}
+
+/* ================= FORMS ================= */
+
+input,
+select,
+textarea,
+.admin-search-input {
+  background: #ffffff;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+}
+
+/* ================= BADGES ================= */
+
+.order-status,
+.badge {
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e5e7eb;
+}
+
+/* =========================================================
+   GLOBAL MODAL FIX – REQUIRED FOR ADMIN ADD ITEM
+========================================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+}
+
+/* hidden state */
+.hidden {
+  display: none !important;
+}
+
+/* modal box (your add-food-modal) */
+.add-food-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px;
+  width: 100%;
+  max-width: 520px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 30px 70px rgba(0,0,0,0.18);
+  animation: modalFadeUp 0.3s ease both;
+}
+
+
+

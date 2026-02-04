@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Food Delivery — Home</title>
+
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+
+<body>
+  <!-- NAV -->
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav-brand">🍔 Food Delivery</div>
+
+      <div class="nav-links" role="menubar">
+        <a role="menuitem" th:href="@{/}">Home</a>
+        <a role="menuitem" th:href="@{/user/menu}">Menu</a>
+        <a role="menuitem" th:href="@{/user/login}">Login</a>
+        <a role="menuitem" th:href="@{/user/register}">Register</a>
+        <a role="menuitem" th:href="@{/admin/login}">Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-layer" aria-hidden="true"></div>
+    <div class="hero-image-overlay" aria-hidden="true"></div>
+
+    <div class="container hero-inner">
+      <!-- LEFT -->
+      <div class="hero-left reveal">
+        <div class="hero-badges" aria-hidden="true">
+          <span class="hero-badge">🚀 30 min avg delivery</span>
+          <span class="hero-badge">🔥 Handpicked local favourites</span>
+          <span class="hero-badge">💳 Secure online payment</span>
+        </div>
+
+        <h1 class="hero-title">
+          Your favourite food,
+          <span class="accent">delivered faster</span> than ever.
+        </h1>
+
+        <p class="hero-subtitle">
+          Craving pizza, burgers or desserts? Order from top-rated restaurants near you
+          and get fresh, hot food delivered to your doorstep.
+        </p>
+
+        <div class="hero-actions">
+          <a th:href="@{/user/menu}" class="btn btn-primary hero-cta">Browse Menu</a>
+          <a th:href="@{/user/register}" class="btn btn-outline-light">Create free account</a>
+        </div>
+
+        <p class="hero-note">
+          No minimum order · Live order tracking · Trusted by food lovers in your city
+        </p>
+
+        <div class="hero-stats" aria-hidden="true">
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-counter="250">250</div>
+            <div class="hero-stat-label">+ Partner Restaurants</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-counter="12">12+</div>
+            <div class="hero-stat-label">min Avg. Prep Time</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-number" data-counter="4.8">4.8</div>
+            <div class="hero-stat-label">★ App Rating</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="hero-right reveal">
+        <div class="hero-card" tabindex="0">
+          <div class="hero-card-header">
+            <div>
+              <div class="hero-card-title">Live Order Preview</div>
+              <div class="hero-card-sub">Example of an active delivery</div>
+            </div>
+            <span class="hero-chip">On the way</span>
+          </div>
+
+          <div class="hero-card-items">
+            • Cheesy Veg Pizza<br/>
+            • Classic Chicken Burger<br/>
+            • Cold Coffee
+          </div>
+
+          <div class="hero-card-footer">
+            <span>ETA</span>
+            <span><strong>24 mins</strong> · Rider: Rahul</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="section section-features reveal">
+    <div class="container">
+      <div class="section-header text-center">
+        <h2 class="section-title">Why choose us?</h2>
+        <p class="section-subtitle">
+          Fast delivery, real reviews, curated menus, and secure checkout — all in one app.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <div class="feature-card reveal">
+          <div class="feature-icon orange">⏱</div>
+          <h3>Lightning-fast delivery</h3>
+          <p>Optimised routes ensure your food arrives hot and fast.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon green">🥗</div>
+          <h3>Quality you can trust</h3>
+          <p>Partnered with verified restaurants and real customer reviews.</p>
+        </div>
+
+        <div class="feature-card reveal">
+          <div class="feature-icon blue">📍</div>
+          <h3>Live order tracking</h3>
+          <p>Track your rider and get accurate ETA updates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      &copy;
+      <span th:text="${#dates.format(#dates.createNow(),'yyyy')}">2025</span>
+      Food Delivery · All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script th:src="@{/js/hero.js}"></script>
+  <script th:src="@{/js/counters.js}"></script>
+  <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

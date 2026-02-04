@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Success - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="payment-success order-card-animated">
+            <!-- Success icon + heading -->
+            <div class="success-icon">✓</div>
+            <h1>Payment Successful!</h1>
+
+            <p class="menu-hero-note" style="margin-top:6px;">
+                Thank you for your order. Your payment has been securely processed.
+            </p>
+
+            <!-- Transaction details -->
+            <div style="margin-top:24px; margin-bottom:10px;">
+                <p th:if="${payment != null}">
+                    <strong>Transaction ID:</strong>
+                    <span th:text="${payment.transactionId}">TXN123</span>
+                </p>
+                <p th:if="${order != null}">
+                    <strong>Order ID:</strong>
+                    <span th:text="${order.orderId}">ORD123</span>
+                </p>
+            </div>
+
+            <p class="menu-hero-note">
+                You’ll receive notifications when the restaurant confirms your order and when
+                your food is on the way.
+            </p>
+
+            <!-- Action buttons -->
+            <div style="margin-top:24px; display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+                <a th:href="@{/user/orders}" class="btn btn-primary">
+                    View My Orders
+                </a>
+                <a th:href="@{/user/menu}" class="btn btn-outline-light">
+                    Continue Browsing
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

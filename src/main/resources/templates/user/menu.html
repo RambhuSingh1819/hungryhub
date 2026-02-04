@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">🍔 Food Delivery</div>
+            <div class="nav-links">
+                <a th:href="@{/user/dashboard}">Dashboard</a>
+                <a th:href="@{/user/menu}">Menu</a>
+                <a th:href="@{/user/cart}">Cart</a>
+                <a th:href="@{/user/orders}">My Orders</a>
+                <a th:href="@{/user/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MENU HERO / HEADER -->
+    <section class="menu-hero">
+        <div class="container menu-hero-inner">
+            <div class="menu-hero-left">
+                <h1 class="menu-title">Explore the menu</h1>
+                <p class="menu-subtitle">
+                    Freshly prepared dishes from your favourite restaurants. Add items to your cart and checkout securely.
+                </p>
+            </div>
+            <div class="menu-hero-right">
+                <div class="category-chips">
+                    <span class="category-chip active">All</span>
+                    <span class="category-chip">Pizza</span>
+                    <span class="category-chip">Burgers</span>
+                    <span class="category-chip">Indian</span>
+                    <span class="category-chip">Desserts</span>
+                </div>
+                <p class="menu-hero-note">Tip: Use search to quickly find what you’re craving.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEARCH + MENU GRID -->
+    <div class="container">
+        <div class="search-bar menu-search-bar">
+            <input type="text"
+                   id="searchInput"
+                   name="search"
+                   placeholder="Search for food items..."
+                   th:value="${search}">
+            <button class="btn btn-primary" onclick="searchItems()">Search</button>
+        </div>
+
+        <div class="menu-grid" id="menuGrid">
+            <!-- items = list passed from controller -->
+            <div class="menu-item menu-item-animated" th:each="item : ${items}">
+                <!-- fixed Thymeleaf expression -->
+                <img th:src="${item.imageUrl != null} ? ${item.imageUrl} : '/images/placeholder.jpg'"
+                     alt="Food Item">
+
+                <h3 th:text="${item.name}">Item Name</h3>
+                <p th:text="${item.description}">Description</p>
+
+                <div class="item-footer">
+                    <span class="price" th:text="'₹' + ${item.price}">₹0</span>
+
+                    <!-- real POST to /user/cart/add -->
+                    <form th:action="@{/user/cart/add}" method="post">
+                        <input type="hidden" name="foodId" th:value="${item.id}">
+                        <button type="submit" class="btn btn-primary" style="position: relative; z-index: 2;">
+                            Add to Cart
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/menu.js}"></script>
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Admin</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">🍔 Admin Panel</div>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/food-items}">Food Items</a>
+            <a th:href="@{/admin/orders}">Orders</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container admin-page">
+
+    <!-- HERO / CONTEXT -->
+    <section class="orders-hero">
+        <div class="orders-hero-inner">
+            <div>
+                <h1 class="orders-title">All Orders</h1>
+                <p class="orders-subtitle">
+                    Track every order in real time. Update order status, set delivery time and monitor payment
+                    at a glance to keep your kitchen and riders in sync.
+                </p>
+            </div>
+            <div class="orders-hero-right">
+                <div class="orders-hero-card">
+                    <span class="orders-hero-chip">Live Orders Overview</span>
+                    <p>
+                        <strong>Active orders:</strong>
+                        <span th:text="${activeOrdersCount != null ? activeOrdersCount : 0}">0</span>
+                    </p>
+                    <p>
+                        <strong>Pending:</strong>
+                        <span th:text="${pendingOrdersCount != null ? pendingOrdersCount : 0}">0</span>
+                    </p>
+                    <p class="orders-hero-note">
+                        Tip: Move orders quickly from <b>Pending → Preparing → Out for Delivery</b>
+                        to keep customers happy.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FILTERS + SEARCH -->
+    <div class="orders-page">
+        <div style="display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; margin-bottom:12px;">
+            <div class="admin-controls">
+                <input type="text"
+                       id="orderSearchInput"
+                       class="admin-search-input"
+                       placeholder="Search by order ID or user…">
+            </div>
+
+            <div class="admin-controls">
+                <button type="button" class="admin-filter-chip active" data-status-filter="ALL">All</button>
+                <button type="button" class="admin-filter-chip" data-status-filter="PENDING">Pending</button>
+                <button type="button" class="admin-filter-chip" data-status-filter="PREPARING">Preparing</button>
+                <button type="button" class="admin-filter-chip" data-status-filter="OUT_FOR_DELIVERY">On the way</button>
+                <button type="button" class="admin-filter-chip" data-status-filter="DELIVERED">Delivered</button>
+            </div>
+        </div>
+
+        <!-- NO ORDERS -->
+        <div th:if="${orders == null or #lists.isEmpty(orders)}" class="empty-state">
+            <div class="empty-state-icon">📭</div>
+            <p>No orders found.</p>
+            <p class="orders-hero-note">
+                Once users start placing orders, they’ll appear here instantly.
+            </p>
+        </div>
+
+        <!-- ORDERS LIST -->
+        <div class="orders-list" th:if="${orders != null and !#lists.isEmpty(orders)}">
+            <div class="order-card order-card-animated"
+                 th:each="order : ${orders}"
+                th:attr="data-status=${order.status.name()},
+         data-user=${order.user != null && order.user.fullName != null ? order.user.fullName : 'na'},
+         data-orderid=${order.orderId}"
+                >
+                <div class="order-header">
+                    <!-- Order title -->
+                    <div>
+                        <h3 th:text="${'Order #' + order.orderId}">Order #123</h3>
+                        <div class="order-meta">
+                            Placed by
+                            <strong th:text="${order.user != null ? order.user.fullName : 'N/A'}">
+                                User Name
+                            </strong>
+                        </div>
+                    </div>
+
+                    <span class="order-status" th:text="${order.status}">PENDING</span>
+                </div>
+
+                <!-- BASIC INFO: USER + CONTACT + ADDRESS -->
+                <p>
+                    <strong>Phone:</strong>
+                    <span th:text="${order.user != null ? order.user.phoneNumber : 'N/A'}">
+                        9999999999
+                    </span>
+                </p>
+                <p>
+                    <strong>Address:</strong>
+                    <span th:text="${order.deliveryAddress != null ? order.deliveryAddress : (order.user != null ? order.user.address : 'N/A')}">
+                        Address
+                    </span>
+                </p>
+
+                <!-- Special instructions from user -->
+                <p th:if="${order.specialInstructions != null and !#strings.isEmpty(order.specialInstructions)}">
+                    <strong>Special Instructions:</strong>
+                    <span th:text="${order.specialInstructions}">
+                        No onions please
+                    </span>
+                </p>
+
+                <!-- Estimated time (if admin has set it) -->
+                <p th:if="${order.estimatedTimeMinutes != null}">
+                    <strong>Estimated Time:</strong>
+                    <span th:text="${order.estimatedTimeMinutes} + ' minutes'">
+                        0 minutes
+                    </span>
+                </p>
+
+                <!-- ITEMS -->
+                <div class="order-items">
+                    <div class="order-item" th:each="item : ${order.items}">
+                        <span th:text="${item.foodItem.name + ' x ' + item.quantity}">
+                            Item x 1
+                        </span>
+                        <span class="price" th:text="${'₹' + item.totalPrice}">
+                            ₹0
+                        </span>
+                    </div>
+                </div>
+
+                <!-- FOOTER: TOTAL + PAYMENT STATUS -->
+                <div class="order-footer">
+                    <p>
+                        <strong>Total:</strong>
+                        <span th:text="${'₹' + order.totalAmount}">₹0</span>
+                    </p>
+
+                    <p class="order-payment">
+                        <span th:if="${order.paymentStatus == T(com.fooddelivery.entity.Order.PaymentStatus).COMPLETED}"
+                              class="badge badge-success">
+                            Payment Completed
+                        </span>
+                        <span th:if="${order.paymentStatus == T(com.fooddelivery.entity.Order.PaymentStatus).PENDING}"
+                              class="badge badge-warning">
+                            Payment Pending
+                        </span>
+                        <span th:if="${order.paymentStatus == T(com.fooddelivery.entity.Order.PaymentStatus).FAILED}"
+                              class="badge badge-danger">
+                            Payment Failed
+                        </span>
+                    </p>
+                </div>
+
+                <!-- ACTIONS -->
+                <div class="order-actions">
+                    <!-- status dropdown with current value selected -->
+                    <select th:id="|statusSelect_${order.orderId}|"
+                            onchange="window.updateOrderStatus && updateOrderStatus(this)">
+                        <option value="PENDING"
+                                th:selected="${order.status.name() == 'PENDING'}">
+                            Pending
+                        </option>
+                        <option value="CONFIRMED"
+                                th:selected="${order.status.name() == 'CONFIRMED'}">
+                            Confirmed
+                        </option>
+                        <option value="PREPARING"
+                                th:selected="${order.status.name() == 'PREPARING'}">
+                            Preparing
+                        </option>
+                        <option value="READY"
+                                th:selected="${order.status.name() == 'READY'}">
+                            Ready
+                        </option>
+                        <option value="OUT_FOR_DELIVERY"
+                                th:selected="${order.status.name() == 'OUT_FOR_DELIVERY'}">
+                            Out for Delivery
+                        </option>
+                        <option value="DELIVERED"
+                                th:selected="${order.status.name() == 'DELIVERED'}">
+                            Delivered
+                        </option>
+                        <option value="CANCELLED"
+                                th:selected="${order.status.name() == 'CANCELLED'}">
+                            Cancelled
+                        </option>
+                    </select>
+
+                    <!-- estimated time input -->
+                    <input type="number"
+                           th:id="|timeInput_${order.orderId}|"
+                           placeholder="Estimated time (minutes)"
+                           th:value="${order.estimatedTimeMinutes}">
+
+                    <!-- Set time button (no Thymeleaf in event attribute) -->
+                    <button class="btn btn-primary set-time-btn"
+                            th:attr="data-order-id=${order.orderId}">
+                        Set Time
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/admin-orders.js}"></script>
+
+<script>
+    // ========== Client-side search & filter ==========
+    const orderSearchInput = document.getElementById('orderSearchInput');
+    const filterChips = document.querySelectorAll('.admin-filter-chip');
+    const orderCards = document.querySelectorAll('.orders-list .order-card');
+
+    function applyOrderFilters() {
+        const query = (orderSearchInput?.value || '').toLowerCase();
+        const activeChip = document.querySelector('.admin-filter-chip.active');
+        const statusFilter = activeChip ? activeChip.getAttribute('data-status-filter') : 'ALL';
+
+        orderCards.forEach(card => {
+            const status = (card.getAttribute('data-status') || '').toUpperCase();
+            const user = (card.getAttribute('data-user') || '').toLowerCase();
+            const orderId = (card.getAttribute('data-orderid') || '').toLowerCase();
+
+            const matchesSearch =
+                user.includes(query) ||
+                orderId.includes(query);
+
+            const matchesStatus =
+                statusFilter === 'ALL' || status === statusFilter;
+
+            card.style.display = (matchesSearch && matchesStatus) ? '' : 'none';
+        });
+    }
+
+    if (orderSearchInput) {
+        orderSearchInput.addEventListener('input', applyOrderFilters);
+    }
+
+    filterChips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            filterChips.forEach(c => c.classList.remove('active'));
+            chip.classList.add('active');
+            applyOrderFilters();
+        });
+    });
+
+    // ========== Attach click handler for "Set Time" buttons ==========
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.set-time-btn').forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                const orderId = this.getAttribute('data-order-id');
+                if (window.setEstimatedTime) {
+                    window.setEstimatedTime(orderId);
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

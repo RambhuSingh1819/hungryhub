@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cart - Food Delivery</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+	<!-- NAVBAR -->
+	<nav class="navbar">
+		<div class="container">
+			<div class="nav-brand">🍔 Food Delivery</div>
+			<div class="nav-links">
+				<a th:href="@{/user/dashboard}">Dashboard</a> <a
+					th:href="@{/user/menu}">Menu</a> <a th:href="@{/user/cart}">Cart</a>
+				<a th:href="@{/user/orders}">My Orders</a> <a
+					th:href="@{/user/logout}">Logout</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- CART HEADER / HERO -->
+	<section class="cart-hero">
+		<div class="container cart-hero-inner">
+			<div class="cart-hero-left">
+				<h1 class="cart-title">Your cart</h1>
+				<p class="cart-subtitle">Review your items, adjust quantities
+					and complete your order with secure online payment.</p>
+				<div class="cart-steps">
+					<div class="cart-step active">
+						<span class="cart-step-number">1</span> <span
+							class="cart-step-label">Cart</span>
+					</div>
+					<div class="cart-step">
+						<span class="cart-step-number">2</span> <span
+							class="cart-step-label">Delivery details</span>
+					</div>
+					<div class="cart-step">
+						<span class="cart-step-number">3</span> <span
+							class="cart-step-label">Payment</span>
+					</div>
+				</div>
+			</div>
+			<div class="cart-hero-right">
+				<div class="cart-hero-card">
+					<span class="cart-hero-chip">Secure Checkout</span>
+					<p>🔒 Powered by Razorpay · UPI / Cards / Netbanking</p>
+					<p class="cart-hero-note">You’ll only be charged after
+						successful payment confirmation.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- CART CONTENT -->
+	<div class="container cart-page-layout">
+
+		<div class="cart-main">
+
+			<!-- Items in Cart -->
+			<div class="cart-items"
+				th:if="${cart.items != null and !cart.items.isEmpty()}">
+				<div class="cart-item cart-item-animated"
+					th:each="item : ${cart.items}">
+					<img
+						th:src="${item.foodItem.imageUrl != null ? item.foodItem.imageUrl : '/images/placeholder.jpg'}"
+						alt="Food Item">
+
+					<div class="cart-item-details">
+						<h3 th:text="${item.foodItem.name}">Item Name</h3>
+						<p class="cart-item-desc" th:text="${item.foodItem.description}">Description</p>
+
+						<div class="cart-item-controls">
+							<button class="btn btn-sm qty-btn"
+								th:onclick="'updateQuantity(' + ${item.id} + ', ' + (${item.quantity} - 1) + ')'">−</button>
+
+							<span class="qty-value" th:text="${item.quantity}">1</span>
+
+							<button class="btn btn-sm qty-btn"
+								th:onclick="'updateQuantity(' + ${item.id} + ', ' + (${item.quantity} + 1) + ')'">+</button>
+
+							<span class="price" th:text="'₹' + ${item.totalPrice}">₹0</span>
+
+							<button class="btn btn-danger btn-sm"
+								th:onclick="'removeFromCart(' + ${item.id} + ')'">Remove</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Empty Cart -->
+			<div th:if="${cart.items == null or cart.items.isEmpty()}"
+				class="empty-cart">
+				<div class="empty-cart-illustration">🛒</div>
+				<h2>Your cart is empty</h2>
+				<p>Looks like you haven’t added anything yet. Let’s fix that!</p>
+				<a th:href="@{/user/menu}" class="btn btn-primary">Browse Menu</a>
+			</div>
+
+		</div>
+
+		<!-- Cart Summary Sidebar -->
+		<aside class="cart-summary-wrapper"
+			th:if="${cart.items != null and !cart.items.isEmpty()}">
+			<div class="cart-summary-card">
+				<h3>Order Summary</h3>
+				<div class="cart-summary-row">
+					<span>Items total</span> <span th:text="'₹' + ${total}">₹0</span>
+				</div>
+				<div class="cart-summary-row">
+					<span>Delivery fee</span> <span>₹0</span>
+				</div>
+				<div class="cart-summary-row cart-summary-total">
+					<span>Total to pay</span> <span th:text="'₹' + ${total}">₹0</span>
+				</div>
+				<a th:href="@{/user/checkout}"
+					class="btn btn-primary btn-block cart-checkout-btn"> Proceed to
+					Checkout </a>
+
+				<p class="cart-summary-note">No extra hidden charges. You can
+					review details before payment.</p>
+			</div>
+		</aside>
+	</div>
+
+	<!-- Toast container (used by cart.js) -->
+	<div id="cartToast"></div>
+
+	<!-- Razorpay -->
+	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+	<!-- cart.js for qty/remove/checkout/payment -->
+	<script th:src="@{/js/cart.js}"></script>
+
+</body>
+</html>

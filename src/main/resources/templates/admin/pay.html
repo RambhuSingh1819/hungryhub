@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Subscription - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">🍔 Admin Panel</div>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/food-items}">Food Items</a>
+            <a th:href="@{/admin/orders}">Orders</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <section class="payment-card" style="max-width: 600px; margin: 40px auto;">
+        <h1>Activate Admin Subscription</h1>
+        <p>
+            Hi <span th:text="${admin.fullName}">Admin</span>, to use the admin panel
+            you need an active subscription.
+        </p>
+
+        <div class="plan-box">
+            <h2>Monthly Plan</h2>
+            <p class="price">
+                ₹<span th:text="${amount}">499</span> / month
+            </p>
+            <p>Unlimited access to:</p>
+            <ul>
+                <li>Food item management</li>
+                <li>Order management</li>
+                <li>Payment tracking</li>
+            </ul>
+        </div>
+
+        <button id="adminPayBtn" class="btn btn-primary" style="margin-top: 20px;">
+            Pay &amp; Activate Now
+        </button>
+
+        <div id="adminPayToast" class="message" style="margin-top: 15px;"></div>
+    </section>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script th:src="@{/js/admin-pay.js}"></script>
+
+</body>
+</html>

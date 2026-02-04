@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - Food Delivery</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container">
+    <div class="nav-brand">🍔 Food Delivery</div>
+    <div class="nav-links">
+      <a th:href="@{/user/dashboard}">Dashboard</a>
+      <a th:href="@{/user/menu}">Menu</a>
+      <a th:href="@{/user/cart}">Cart</a>
+      <a th:href="@{/user/orders}">My Orders</a>
+      <a th:href="@{/user/logout}">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CHECKOUT -->
+<section class="section">
+  <div class="container" style="max-width: 720px;">
+    
+    <div class="payment-card">
+      <h1>Delivery details</h1>
+      <p>Please confirm your address before proceeding to payment.</p>
+
+     <form id="checkoutForm" onsubmit="return false;">
+
+        <div class="form-group">
+          <label>Delivery Address</label>
+          <textarea id="deliveryAddress" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Special Instructions (Optional)</label>
+          <textarea id="specialInstructions" rows="2"
+            placeholder="Extra spicy, ring bell, etc."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          Create Order &amp; Pay Securely
+        </button>
+      </form>
+
+      <div id="checkoutToast" class="message" style="margin-top:14px;"></div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Razorpay -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<!-- Checkout JS -->
+<script th:src="@{/js/checkout.js}"></script>
+
+</body>
+</html>

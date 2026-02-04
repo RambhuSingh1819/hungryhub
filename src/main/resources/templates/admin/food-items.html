@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Items - Admin</title>
+
+    <!-- (Optional) Bootstrap – you can keep it if you're using it elsewhere -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!-- NAVBAR (consistent with rest of project) -->
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">🍔 Admin Panel</div>
+        <div class="nav-links">
+            <a th:href="@{/admin/dashboard}">Dashboard</a>
+            <a th:href="@{/admin/food-items}">Food Items</a>
+            <a th:href="@{/admin/orders}">Orders</a>
+            <a th:href="@{/admin/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="container admin-page">
+    <div class="admin-header">
+        <div>
+            <h1 class="admin-title">Food Items Management</h1>
+            <p class="admin-subtitle">
+                Add, update or remove items from your menu. Use attractive images and clear descriptions
+                to boost conversions and make customers hungry at first glance.
+            </p>
+        </div>
+        <div class="admin-header-right">
+            <div class="admin-chip-card">
+                <span class="admin-chip">Menu Overview</span>
+                <p>
+                    <strong>Total items:</strong>
+                    <span th:text="${items != null ? items.size() : 0}">0</span>
+                </p>
+                <p>Tip: Highlight bestsellers and keep prices up to date.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOP ACTION ROW -->
+    <div class="admin-main admin-stats">
+        <div style="display:flex; justify-content:space-between; gap:10px; align-items:center; flex-wrap:wrap;">
+            <button class="btn btn-primary btn-sm" onclick="showAddItemModal()">
+                + Add New Item
+            </button>
+
+            <div class="admin-controls">
+                <input type="text"
+                       class="admin-search-input"
+                       id="foodSearchInput"
+                       placeholder="Search by name or category…">
+            </div>
+        </div>
+    </div>
+
+    <!-- MINI HERO / CONTEXT BAND -->
+    <section class="menu-hero">
+        <div class="menu-hero-inner">
+            <div>
+                <h2 class="menu-title">All Menu Items</h2>
+                <p class="menu-subtitle">
+                    Keep your menu clean, organized and tempting. High quality images and short, punchy
+                    descriptions can dramatically increase order rates.
+                </p>
+            </div>
+
+            <div class="menu-hero-right">
+                <div class="category-chips">
+                    <span class="category-chip active">All</span>
+                    <span class="category-chip">Popular</span>
+                    <span class="category-chip">Combos</span>
+                    <span class="category-chip">Drinks</span>
+                </div>
+                <div class="menu-hero-note">
+                    These chips are just visual hints — your search bar filters items in real time.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRID OF FOOD CARDS (animated) -->
+    <div class="admin-main">
+        <div class="menu-grid">
+            <div class="menu-item menu-item-animated admin-food-card"
+                 th:each="item : ${items}"
+                 th:attr="data-name=${item.name}, data-category=${item.category}">
+                <img th:src="${item.imageUrl != null ? item.imageUrl : '/images/placeholder.jpg'}"
+                     alt="Food Item">
+
+                <h3 th:text="${item.name}">Item Name</h3>
+
+                <p class="cart-item-desc" th:text="${item.description}">
+                    Delicious description goes here…
+                </p>
+
+                <div class="item-footer">
+                    <span class="price" th:text="'₹' + ${item.price}">₹0</span>
+
+                    <div style="display:flex; gap:6px;">
+                        <button
+                            class="table-action-btn"
+                            th:attr="data-id=${item.id},
+                                     data-name=${item.name},
+                                     data-description=${item.description},
+                                     data-price=${item.price},
+                                     data-category=${item.category},
+                                     data-imageurl=${item.imageUrl}"
+                            onclick="editItem(this)">
+                            Edit
+                        </button>
+
+                        <button
+                            class="table-action-btn table-action-btn-danger"
+                            th:onclick="'deleteItem(' + ${item.id} + ')'">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty state -->
+            <div class="empty-state"
+                 th:if="${items == null or #lists.isEmpty(items)}">
+                <div class="empty-state-icon">🍽️</div>
+                <p>No food items found.</p>
+                <p class="menu-hero-note">
+                    Click “Add New Item” to start building your menu.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add / Edit Item Modal (uses global .modal styles + animation) -->
+<!-- ADD / EDIT FOOD ITEM MODAL -->
+<div id="itemModal" class="modal-overlay hidden">
+
+    <div class="add-food-modal">
+
+        <!-- Close -->
+        <button class="modal-close" onclick="closeItemModal()">×</button>
+
+        <!-- Title -->
+        <h2 id="modalTitle" class="modal-title">Add Food Item</h2>
+
+        <form id="itemForm">
+            <input type="hidden" id="itemId">
+
+            <!-- NAME -->
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" id="itemName" required>
+            </div>
+
+            <!-- DESCRIPTION + AI -->
+            <div class="form-group">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <label>Description</label>
+                    <button type="button"
+                            class="btn btn-sm otp-btn"
+                            onclick="suggestWithAI()">
+                        ✨ Use AI
+                    </button>
+                </div>
+
+                <textarea id="itemDescription" rows="3" required></textarea>
+                <div id="aiHint" class="form-text"></div>
+            </div>
+
+            <!-- PRICE -->
+            <div class="form-group">
+                <label>Price (₹)</label>
+                <input type="number" id="itemPrice" step="0.01" required>
+            </div>
+
+            <!-- CATEGORY -->
+            <div class="form-group">
+                <label>Category</label>
+                <input type="text" id="itemCategory">
+            </div>
+
+            <!-- IMAGE -->
+            <div class="form-group">
+                <label>Image URL</label>
+                <input type="url" id="itemImageUrl" oninput="updateImagePreview()">
+
+                <div id="imagePreviewWrapper" style="display:none; margin-top:10px;">
+                    <small>Preview</small><br>
+                    <img id="imagePreview"
+                         style="max-width:100%; max-height:200px; border-radius:10px;">
+                </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div style="display:flex; gap:10px; margin-top:14px;">
+                <button type="button"
+                        class="btn btn-danger"
+                        onclick="closeItemModal()">
+                    Cancel
+                </button>
+
+                <button type="submit"
+                        class="btn btn-primary btn-block">
+                    Save Item
+                </button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<script th:src="@{/js/admin-food-items.js}"></script>
+
+<script>
+    // Small optional enhancement: client-side filtering by name/category using the search input
+    const searchInput = document.getElementById('foodSearchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', function () {
+            const query = this.value.toLowerCase();
+            document.querySelectorAll('.admin-food-card').forEach(card => {
+                const name = (card.getAttribute('data-name') || '').toLowerCase();
+                const category = (card.getAttribute('data-category') || '').toLowerCase();
+                if (name.includes(query) || category.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

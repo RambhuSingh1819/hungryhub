@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="admin-auth">
+
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">🍔 Admin Panel</div>
+            <div class="nav-links">
+                <a th:href="@{/}">User Site</a>
+                <a th:href="@{/admin/login}">Login</a>
+                <a th:href="@{/admin/register}">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- LOGIN CARD -->
+    <div class="auth-container">
+        <div class="auth-card">
+            <h2>Admin Login</h2>
+
+            <form id="adminLoginForm">
+                <div class="form-group">
+                    <label>Admin ID or Email</label>
+                    <input type="text" id="identifier" name="identifier" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+
+            <p class="text-center" style="margin-top: 10px;">
+                <a th:href="@{/admin/forgot-password}">Forgot password?</a>
+            </p>
+
+            <p class="text-center">
+                Don&apos;t have an account?
+                <a th:href="@{/admin/register}">Register here</a>
+            </p>
+
+            <div id="message" class="message"></div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin-auth.js}"></script>
+</body>
+</html>

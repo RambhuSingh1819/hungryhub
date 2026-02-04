@@ -1,0 +1,137 @@
+<!-- templates/user/dashboard.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>User Dashboard - Food Delivery</title>
+
+    <!-- main app stylesheet (keep filename same) -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="user-body">
+    <!-- NAVBAR -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="container">
+            <div class="nav-brand">🍔 Food Delivery</div>
+            <div class="nav-links" role="menubar" aria-label="Main menu">
+                <a role="menuitem" th:href="@{/user/dashboard}">Dashboard</a>
+                <a role="menuitem" th:href="@{/user/menu}">Menu</a>
+                <a role="menuitem" th:href="@{/user/cart}">Cart <span id="cartCount" class="nav-cart-count" th:text="${cartCount != null ? cartCount : 0}">0</span></a>
+                <a role="menuitem" th:href="@{/user/orders}">My Orders</a>
+                <a role="menuitem" th:href="@{/user/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- DASHBOARD HERO -->
+    <section class="dashboard-hero" aria-labelledby="dashboard-heading">
+        <div class="container dashboard-hero-inner">
+            <div class="dashboard-hero-left">
+                <p class="dashboard-greeting">
+                  Hi, <strong th:text="${user.fullName}">User</strong> 👋
+                </p>
+
+                <h1 id="dashboard-heading" class="dashboard-title">What are you craving today?</h1>
+
+                <p class="dashboard-subtitle">
+                    Explore delicious dishes from top-rated restaurants. Reorder your favourites or discover something new.
+                </p>
+
+                <div class="dashboard-quick-actions">
+                    <a th:href="@{/user/menu}" id="browseMenuCta" class="btn btn-primary hero-cta">Browse Menu</a>
+                    <a th:href="@{/user/orders}" class="btn btn-outline-light">View Previous Orders</a>
+                </div>
+
+                <p class="dashboard-note">
+                    Tip: Add items to your cart and pay securely via UPI, cards or net banking.
+                </p>
+            </div>
+
+            <div class="dashboard-hero-right" aria-hidden="false">
+                <div class="dashboard-stats-card reveal" role="region" aria-label="Today's snapshot">
+                    <h3>Today’s snapshot</h3>
+
+                    <div class="dashboard-stats-grid" role="list">
+                        <div class="dashboard-stat" role="listitem">
+                            <!-- data-counter attribute used by JS to animate -->
+                            <span class="dashboard-stat-number" th:attr="data-counter=${totalOrders != null ? totalOrders : 0}" th:text="${totalOrders != null ? totalOrders : 0}">0</span>
+                            <span class="dashboard-stat-label">Total orders</span>
+                        </div>
+                        <div class="dashboard-stat" role="listitem">
+                            <span class="dashboard-stat-number" th:attr="data-counter=${ongoingOrders != null ? ongoingOrders : 0}" th:text="${ongoingOrders != null ? ongoingOrders : 0}">0</span>
+                            <span class="dashboard-stat-label">Ongoing</span>
+                        </div>
+                        <div class="dashboard-stat" role="listitem">
+                            <span class="dashboard-stat-number" th:attr="data-counter=${avgRating != null ? avgRating : 4.8}" th:text="${avgRating != null ? avgRating : 4.8}">4.8★</span>
+                            <span class="dashboard-stat-label">Avg rating</span>
+                        </div>
+                    </div>
+
+                    <p class="dashboard-stat-note">Thank you for being a foodie with us!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RECOMMENDED / MENU SECTION -->
+    <section class="dashboard-menu-section" aria-labelledby="recommended-heading">
+        <div class="container">
+            <div class="dashboard-section-header">
+                <div>
+                    <h2 id="recommended-heading" class="dashboard-section-title">Recommended for you</h2>
+                    <p class="dashboard-section-subtitle">Handpicked dishes based on popularity and ratings.</p>
+                </div>
+
+                <a th:href="@{/user/menu}" class="dashboard-view-all-link">View full menu →</a>
+            </div>
+
+            <div class="menu-grid reveal-grid" aria-live="polite">
+                <!-- -> Thymeleaf loop: preserve your variable names (items) -->
+                <div class="menu-item menu-item-animated reveal" th:each="item : ${items}">
+                    <img th:src="${item.imageUrl != null ? @{${item.imageUrl}} : @{/images/app.jpeg}}" src="/images/app.jpeg" alt="" />
+                    <div style="padding:12px;">
+                        <h3 th:text="${item.name}">Item Name</h3>
+                        <p th:text="${item.description}">Tasty item description</p>
+
+                        <div class="item-footer">
+                            <div class="price" th:text="'₹ ' + ${item.price}">₹0</div>
+                            <!-- data-item-id and data-item-name help JS animate and identify -->
+                            <button class="btn table-action-btn" type="button"
+                                    th:attr="data-item-id=${item.id}, data-item-name=${item.name}"
+                                    th:onclick="'addToCart(' + ${item.id} + ');'">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fallback sample items when ${items} is empty (optional) -->
+                <div class="menu-item menu-item-animated reveal" th:if="${items == null or #lists.isEmpty(items)}">
+                    <img src="/images/app.jpeg" alt="Sample item"/>
+                    <div style="padding:12px;">
+                        <h3>Spicy Paneer Wrap</h3>
+                        <p>Cheesy, spicy wrap — popular choice.</p>
+                        <div class="item-footer">
+                            <div class="price">₹ 199</div>
+                            <button class="btn table-action-btn" type="button" onclick="addToCart(0)">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- optional footer -->
+    <footer class="footer">
+        <div class="container">
+            &copy; <span th:text="${#dates.format(#dates.createNow(),'yyyy')}">2025</span> Food Delivery · All rights reserved.
+        </div>
+    </footer>
+
+    <!-- Scripts: user-dashboard.js (keeps same name), hero.js and app.js remain unchanged -->
+    <script th:src="@{/js/user-dashboard.js}"></script>
+    <script th:src="@{/js/hero.js}"></script>
+    <script th:src="@{/js/app.js}"></script>
+</body>
+</html>

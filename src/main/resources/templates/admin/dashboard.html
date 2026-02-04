@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">🍔 Admin Panel</div>
+            <div class="nav-links">
+                <a th:href="@{/admin/dashboard}">Dashboard</a>
+                <a th:href="@{/admin/food-items}">Food Items</a>
+                <a th:href="@{/admin/orders}">Orders</a>
+                <a th:href="@{/admin/logout}">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO / SUMMARY SECTION -->
+    <section class="dashboard-hero">
+        <div class="container dashboard-hero-inner">
+            <!-- LEFT: Greeting + quick actions -->
+            <div class="dashboard-hero-left">
+                <div class="dashboard-greeting">
+                    Hello,
+                    <span th:text="${admin != null ? admin.fullName : 'Admin'}">Admin</span>
+                </div>
+                <h1 class="dashboard-title">Admin Dashboard</h1>
+                <p class="dashboard-subtitle">
+                    Track orders in real time, manage your menu, and keep your customers happy with smooth operations.
+                </p>
+
+                <div class="dashboard-quick-actions">
+                    <a th:href="@{/admin/food-items}" class="btn btn-primary btn-sm">Manage Food Items</a>
+                    <a th:href="@{/admin/orders}" class="btn btn-outline-light btn-sm">View All Orders</a>
+                </div>
+
+                <p class="dashboard-note">
+                    Admin ID:
+                    <strong th:text="${admin != null ? admin.adminId : 'ADM123'}">ADM123</strong>
+                    · Watch “Pending” orders to avoid delays.
+                </p>
+            </div>
+
+            <!-- RIGHT: Stats card -->
+            <div class="dashboard-hero-right">
+                <div class="dashboard-stats-card">
+                    <h3>Today at a glance</h3>
+                    <div class="dashboard-stats-grid">
+                        <div class="dashboard-stat">
+                            <span class="dashboard-stat-number"
+                                  th:text="${todayOrdersCount != null ? todayOrdersCount : 0}">
+                                0
+                            </span>
+                            <span class="dashboard-stat-label">Orders</span>
+                        </div>
+                        <div class="dashboard-stat">
+                            <span class="dashboard-stat-number"
+                                  th:text="${pendingOrdersCount != null ? pendingOrdersCount : 0}">
+                                0
+                            </span>
+                            <span class="dashboard-stat-label">Pending</span>
+                        </div>
+                        <div class="dashboard-stat">
+                            <span class="dashboard-stat-number"
+                                  th:text="${todayRevenue != null ? '₹' + todayRevenue : '₹0'}">
+                                ₹0
+                            </span>
+                            <span class="dashboard-stat-label">Revenue</span>
+                        </div>
+                    </div>
+                    <p class="dashboard-stat-note">
+                        Last updated
+                        <span th:text="${#dates.format(new java.util.Date(), 'hh:mm a')}">
+                            10:30 AM
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT: Recent Orders -->
+    <div class="container admin-page">
+        <div class="admin-main">
+            <div class="admin-table-wrapper">
+                <div class="admin-table-title-row">
+                    <h2>Recent Orders</h2>
+                    <div class="admin-controls">
+                        <input type="text" id="recentOrdersSearch"
+                               class="admin-search-input"
+                               placeholder="Search by order ID or user…">
+                    </div>
+                </div>
+
+                <!-- Orders list (card style, reusing your classes + animation) -->
+                <div class="orders-list" th:if="${orders != null and !#lists.isEmpty(orders)}">
+                    <div class="order-card order-card-animated" th:each="order : ${orders}">
+                        <div class="order-header">
+                            <div>
+                                <h3 th:text="'Order #' + ${order.orderId}">Order #123</h3>
+                                <div class="order-meta">
+                                    <span>
+                                        Placed by
+                                        <strong th:text="${order.user != null ? order.user.fullName : 'User'}">
+                                            User Name
+                                        </strong>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="order-status" th:text="${order.status}">
+                                PENDING
+                            </span>
+                        </div>
+
+                        <div class="order-items">
+                            <p>
+                                <strong>Total:</strong>
+                                <span th:text="'₹' + ${order.totalAmount}">₹0</span>
+                            </p>
+                            <p th:if="${order.specialInstructions != null and !#strings.isEmpty(order.specialInstructions)}">
+                                <strong>Instructions:</strong>
+                                <span th:text="${order.specialInstructions}">
+                                    No onions please
+                                </span>
+                            </p>
+                        </div>
+
+                        <div class="order-footer">
+                            <p class="order-payment">
+                                <strong>Payment:</strong>
+                                <span th:if="${order.paymentStatus == 'COMPLETED'}"
+                                      class="badge badge-success">
+                                    Completed
+                                </span>
+                                <span th:if="${order.paymentStatus == 'PENDING'}" class="badge badge-warning">
+                                    Pending
+                                </span>
+                               
+                               <span th:if="${order.paymentStatus == 'FAILED'}" class="badge badge-danger">
+                                    Failed
+                                </span>
+                            </p>
+                            <a th:href="@{/admin/orders}" class="table-action-btn">
+                                View / Manage
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Message when there are no orders -->
+                <div class="empty-state" th:if="${orders == null or #lists.isEmpty(orders)}">
+                    <div class="empty-state-icon">📭</div>
+                    <p>No recent orders found.</p>
+                    <p class="orders-hero-note">
+                        Once users start placing orders, they’ll appear here instantly.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/admin-dashboard.js}"></script>
+</body>
+</html>

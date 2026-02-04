@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Register - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">🍔 Food Delivery</div>
+        <div class="nav-links">
+            <a th:href="@{/}">Home</a>
+            <a th:href="@{/user/login}">Login</a>
+            <a th:href="@{/user/register}">Register</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container auth-container">
+    <div class="auth-card">
+        <h1>User Registration</h1>
+        <p class="auth-subtitle">Create your account and start ordering.</p>
+
+        <div id="message" class="alert" style="display:none;"></div>
+
+        <form id="registerForm" onsubmit="return false;">
+            <div class="form-group">
+                <label for="fullName">Full name</label>
+                <input type="text" id="fullName" name="fullName" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email (for OTP)</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group inline-group">
+                <div>
+                    <label for="otp">OTP</label>
+                    <input type="text" id="otp" name="otp" placeholder="Enter OTP">
+                </div>
+                <div class="inline-button">
+                    <button type="button" class="btn btn-secondary" onclick="sendOtp()">Send OTP</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+
+            <button type="button" class="btn btn-primary" onclick="registerUser()">Register</button>
+        </form>
+
+        <p class="auth-footer-text">
+            Already have an account? <a th:href="@{/user/login}">Login</a>
+        </p>
+    </div>
+</div>
+
+<script>
+    const messageDiv = document.getElementById("message");
+
+    function showMessage(text, type) {
+        messageDiv.style.display = "block";
+        messageDiv.textContent = text;
+        messageDiv.className = "alert alert-" + type;
+    }
+
+    async function sendOtp() {
+        const email = document.getElementById("email").value.trim();
+
+        if (!email) {
+            showMessage("Please enter email first.", "danger");
+            return;
+        }
+
+        try {
+            const res = await fetch("/user/send-otp", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ email: email })
+            });
+
+            const data = await res.json();
+            if (res.ok && data.success) {
+                showMessage(data.message || "OTP sent successfully.", "success");
+            } else {
+                showMessage(data.message || "Failed to send OTP.", "danger");
+            }
+        } catch (e) {
+            showMessage("Error sending OTP: " + e.message, "danger");
+        }
+    }
+
+    async function registerUser() {
+        const fullName = document.getElementById("fullName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const otp = document.getElementById("otp").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (!fullName || !email || !otp || !password || !confirmPassword) {
+            showMessage("Please fill all fields.", "danger");
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage("Passwords do not match.", "danger");
+            return;
+        }
+
+        try {
+            // First verify OTP
+            const verifyRes = await fetch("/user/verify-otp", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ email: email, otp: otp })
+            });
+
+            const verifyData = await verifyRes.json();
+            if (!(verifyRes.ok && verifyData.success)) {
+                showMessage(verifyData.message || "OTP verification failed.", "danger");
+                return;
+            }
+
+            // Then register user
+            const regRes = await fetch("/user/register", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    fullName: fullName,
+                    email: email,
+                    password: password
+                })
+            });
+
+            const regData = await regRes.json();
+            if (regRes.ok && regData.success) {
+                showMessage("Registration successful! Redirecting to login...", "success");
+                setTimeout(() => {
+                    window.location.href = "/user/login";
+                }, 1500);
+            } else {
+                showMessage(regData.message || "Registration failed.", "danger");
+            }
+
+        } catch (e) {
+            showMessage("Error: " + e.message, "danger");
+        }
+    }
+</script>
+
+</body>
+</html>

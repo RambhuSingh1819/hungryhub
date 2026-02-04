@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Food Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="container">
+        <div class="nav-brand">🍔 Food Delivery</div>
+        <div class="nav-links">
+            <a th:href="@{/user/dashboard}">Dashboard</a>
+            <a th:href="@{/user/menu}">Menu</a>
+            <a th:href="@{/user/cart}">Cart</a>
+            <a th:href="@{/user/orders}" class="active">My Orders</a>
+            <a th:href="@{/user/logout}">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ORDERS HEADER -->
+<section class="orders-hero">
+    <div class="container orders-hero-inner">
+        <div class="orders-hero-left">
+            <h1 class="orders-title">My Orders</h1>
+            <p class="orders-subtitle">
+                Track your current orders, view past deliveries and check payment status here.
+            </p>
+        </div>
+
+        <div class="orders-hero-right">
+            <div class="orders-hero-card">
+                <span class="orders-hero-chip">Live Tracking</span>
+                <p>📦 See updates like <strong>Pending</strong>, <strong>Preparing</strong>, <strong>Completed</strong>.</p>
+                <p class="orders-hero-note">Need help? Contact support for order issues.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container orders-page">
+
+    <!-- EMPTY STATE -->
+    <div th:if="${orders == null or #lists.isEmpty(orders)}" class="empty-state">
+        <div class="empty-state-icon">📭</div>
+        <h2>No orders yet</h2>
+        <p>You haven’t placed any orders yet. Start exploring the menu!</p>
+        <a th:href="@{/user/menu}" class="btn btn-primary">Browse Menu</a>
+    </div>
+
+    <!-- ORDER LIST -->
+    <div class="orders-list" th:if="${orders != null and !#lists.isEmpty(orders)}">
+
+        <div class="order-card order-card-animated" th:each="order : ${orders}">
+
+            <!-- Header -->
+            <div class="order-header">
+                <div>
+                    <h3 th:text="'Order #' + ${order.orderId}">Order #123</h3>
+
+                    <p class="order-meta"
+                       th:text="${order.createdAt != null ? #temporals.format(order.createdAt, 'dd MMM yyyy, hh:mm a') : 'Date unavailable'}">
+                        01 Jan 2025, 08:30 PM
+                    </p>
+                </div>
+
+                <!-- Order Status Badge -->
+                <span class="order-status"
+                      th:classappend="' status-' + ${order.status.name().toLowerCase()}"
+                      th:text="${order.status}">
+                    PENDING
+                </span>
+            </div>
+
+            <!-- ITEMS -->
+            <div class="order-items" th:if="${order.items != null}">
+                <div class="order-item" th:each="item : ${order.items}">
+                    <span th:text="${item.foodItem != null ? item.foodItem.name : 'Item'} + ' x ' + ${item.quantity}">
+                        Item x 1
+                    </span>
+                    <span class="price" th:text="'₹' + ${item.totalPrice}">₹0</span>
+                </div>
+            </div>
+
+            <!-- FOOTER INFO -->
+            <div class="order-footer">
+
+                <!-- Total Amount -->
+                <p>
+                    <strong>Total:</strong>
+                    <span th:text="'₹' + ${order.totalAmount}">₹0</span>
+                </p>
+
+                <!-- Special Instructions -->
+                <p th:if="${order.specialInstructions != null and !#strings.isEmpty(order.specialInstructions)}">
+                    <strong>Your Instructions:</strong>
+                    <span th:text="${order.specialInstructions}">None</span>
+                </p>
+
+                <!-- Estimated Time -->
+                <p th:if="${order.estimatedTimeMinutes != null}">
+                    <strong>Estimated Delivery Time:</strong>
+                    <span th:text="${order.estimatedTimeMinutes} + ' minutes'">0 minutes</span>
+                </p>
+
+                <!-- Payment Status -->
+                <p class="order-payment">
+                    <strong>Payment Status:</strong>
+
+                    <span th:if="${order.paymentStatus == T(com.fooddelivery.entity.Order.PaymentStatus).COMPLETED}"
+                          class="badge badge-success">Completed</span>
+
+                    <span th:if="${order.paymentStatus == T(com.fooddelivery.entity.Order.PaymentStatus).PENDING}"
+                          class="badge badge-warning">Pending</span>
+
+                    <span th:if="${order.paymentStatus == T(com.fooddelivery.entity.Order.PaymentStatus).FAILED}"
+                          class="badge badge-danger">Failed</span>
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
