@@ -13,28 +13,41 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
+    
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
+    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable)
-
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                // EVERYTHING allowed — controller controls access
                 .anyRequest().permitAll()
-            )
-
-            .formLogin(AbstractHttpConfigurer::disable)
-            .httpBasic(AbstractHttpConfigurer::disable)
-            .logout(AbstractHttpConfigurer::disable);
-
-        http.headers(headers -> headers.frameOptions().disable());
-
+            );
         return http.build();
     }
+}
+
+
+    // @Bean
+    // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
+    //     http
+    //         .csrf(AbstractHttpConfigurer::disable)
+
+    //         .authorizeHttpRequests(auth -> auth
+    //             // EVERYTHING allowed — controller controls access
+    //             .anyRequest().permitAll()
+    //         )
+
+    //         .formLogin(AbstractHttpConfigurer::disable)
+    //         .httpBasic(AbstractHttpConfigurer::disable)
+    //         .logout(AbstractHttpConfigurer::disable);
+
+    //     http.headers(headers -> headers.frameOptions().disable());
+
+    //     return http.build();
+    // }
 }
