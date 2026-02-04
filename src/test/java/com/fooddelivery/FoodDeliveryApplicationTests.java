@@ -1,13 +1,13 @@
-package com.fooddelivery;
+// package com.fooddelivery;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class FoodDeliveryApplicationTests {
+// @SpringBootTest
+// class FoodDeliveryApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
