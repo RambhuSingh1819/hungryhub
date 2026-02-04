@@ -4,15 +4,13 @@ FROM eclipse-temurin:21-jdk-alpine
 # Set working directory
 WORKDIR /app
 
-# Copy all files
-COPY . .
-
-# Build the Spring Boot application
-RUN ./mvnw clean package -DskipTests
+# Copy only the built JAR
+COPY target/*.jar app.jar
 
 # Expose port
 EXPOSE 8185
 
-# Run the jar
-CMD ["java", "-jar", "target/*.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
 
