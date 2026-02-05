@@ -1,72 +1,87 @@
-# 🍔 HungryHub – Online Food Ordering & Delivery System
-### 📌 Project Overview
+# 🍔 HungryHub – Online Food Ordering & Delivery System 
+---
 
-HungryHub is a modern, scalable, and user-friendly online food ordering and delivery platform designed to simplify the process of ordering meals from nearby restaurants. The system connects customers, restaurants, and delivery partners through a single integrated platform, ensuring a smooth, efficient, and reliable food delivery experience.
+## 📌 Project Overview
+
+
+   HungryHub is a modern, scalable, and user-friendly online food ordering and delivery platform designed to simplify the process of ordering meals from nearby restaurants. The system connects customers, restaurants, and delivery        partners through a single integrated platform, ensuring a smooth, efficient, and reliable food delivery experience.
 
 This project is built to demonstrate real-world full-stack application development, following industry-standard software engineering practices, including modular architecture, secure authentication, and RESTful API design.
 
-### 🎯 Project Objectives
+---
 
-	Provide a seamless online food ordering experience for customers
+## 🎯 Project Objectives
 
-	Enable restaurants to manage menus and orders efficiently
+  * Provide a seamless online food ordering experience for customers.
 
-	Support delivery partners in managing deliveries smoothly
+  * Enable restaurants to manage menus and orders efficiently.
 
-	Demonstrate real-world system design, workflows, and database modeling
+  *	Support delivery partners in managing deliveries smoothly.
 
-### 👥 User Roles
+  * Demonstrate real-world system design, workflows, and database modeling.
 
-	Customer
 
-	Restaurant (Admin)
 
-	Delivery Partner
+## 👥 User Roles
+
+ * Customer
+
+ * Restaurant (Admin)
+
+ * Delivery Partner
 
 Each role has specific permissions and responsibilities within the system.
 
-### ✨ Features
+
+
+## ✨ Features
   ### 👤 Customer Features
 
-	Secure registration and login
+ * Secure registration and login
 
-	Browse nearby restaurants
+* Browse nearby restaurants
 
-	View menus with prices and descriptions
+ * View menus with prices and descriptions
 
-	Add, update, or remove items from cart
+ * Add, update, or remove items from cart
 
-	Place food orders
+ * Place food orders
 
-	Track order status in real time
+ * Track order status in real time
 
-	View previous order history
+ * View previous order history
 
-  ### 🏪 Restaurant (Admin) Features
 
-	Secure login
 
-	Add, update, and delete food items
+## 🏪 Restaurant (Admin) Features
 
-	Manage food availability and pricing
+ * Secure login
 
-	Receive real-time order notifications
+ * Add, update, and delete food items
 
-	Accept and update order status
+ * Manage food availability and pricing
 
-  ### 🚴 Delivery Partner Features
+ * Receive real-time order notifications
 
-	Secure login
+ * Accept and update order status
 
-	View assigned delivery orders
 
-	Update delivery status
 
-	Confirm successful delivery
+## 🚴 Delivery Partner Features
 
-  ### 🏗️ System Architecture
+ * Secure login
 
- HungryHub follows a layered architecture to ensure scalability and maintainability.
+ * View assigned delivery orders
+
+ * Update delivery status
+
+ * Confirm successful delivery
+
+
+
+  ## 🏗️ System Architecture
+
+ ### HungryHub follows a layered architecture to ensure scalability and maintainability.
 
 	Frontend (UI)
 		↓
@@ -74,14 +89,16 @@ Each role has specific permissions and responsibilities within the system.
 		↓
 	Database
 
- 	Frontend handles user interaction and UI
+ * Frontend handles user interaction and UI
 
-    Backend handles business logic and API requests
+ * Backend handles business logic and API requests
 
-    Database stores users, orders, restaurants, and food data
+ * Database stores users, orders, restaurants, and food data
 
-  ### 🔄 Application Workflow
-	Customer Flow
+
+
+  ## 🔄 Application Workflow
+### Customer Flow
 
 	User registers or logs in
 		↓
@@ -94,9 +111,9 @@ Each role has specific permissions and responsibilities within the system.
 	Tracks order status
 		↓
 	Receives food delivery
-		↓
-	Restaurant Flow
-		↓
+		
+### Restaurant Flow
+		
 	Restaurant logs in
 		↓
 	Manages menu and availability
@@ -106,9 +123,9 @@ Each role has specific permissions and responsibilities within the system.
 	Prepares food
 		↓
 	Updates order status
-		↓
-	Delivery Partner Flow
-		↓
+		
+### Delivery Partner Flow
+		
 	Delivery partner logs in
 		↓
 	Receives assigned order
@@ -119,10 +136,13 @@ Each role has specific permissions and responsibilities within the system.
 		↓
 	Confirms delivery
 
-  ### 📐 UML Diagrams
 
-	1️⃣ Use Case Diagram
-			usecaseDiagram
+  ## 📐 UML Diagrams
+
+	1️⃣ Use Case Diagram 
+	
+	   usecaseDiagram
+	
 			actor Customer
 			actor Restaurant
 			actor DeliveryPartner
@@ -149,7 +169,8 @@ Each role has specific permissions and responsibilities within the system.
 			
 	2️⃣ System Flow Diagram
 			
-			flowchart TD
+		flowchart TD
+		
 		    A[Customer Login / Register] --> B[Browse Restaurants]
 		    B --> C[View Menu]
 		    C --> D[Add Items to Cart]
@@ -165,7 +186,9 @@ Each role has specific permissions and responsibilities within the system.
 		    K --> L[Order Completed]
 
 	3️⃣ ER Diagram
-			erDiagram
+	
+		erDiagram
+		
 		    USER ||--o{ ORDER : places
 		    USER {
 		        int user_id
@@ -206,72 +229,82 @@ Each role has specific permissions and responsibilities within the system.
 		        string status
 		    }
 
-### 🔐 Security Implementation
 
-		Secure authentication and authorization
+
+## 🔐 Security Implementation
+
+ * Secure authentication and authorization
+
+* Role-based access control (Customer, Restaurant, Delivery Partner)
 		
-		Role-based access control (Customer, Restaurant, Delivery Partner)
+ * Protected APIs
 		
-		Protected APIs
-		
-		Secure handling of user data
+ * Secure handling of user data
+
+
 			
-### 🛠️ Technologies Used
+## 🛠️ Technologies Used
 
-	Backend
+### Backend
 
-		Java / Spring Boot
+ * Java / Spring Boot
 
-		RESTful APIs
+ * RESTful APIs
 
-		JWT Authentication
+ * JWT Authentication
 
-	Frontend
+### Frontend
 
-		React / HTML / CSS / JavaScript
+ * React / HTML / CSS / JavaScript
 	
-		Database
+ * Database
 
-		MySQL / PostgreSQL
+ * MySQL / PostgreSQL
 	
-	Tools
+### Tools
 
-		Git & GitHub
+ * Git & GitHub
 
-		Eclipse
+ * Eclipse
 
-### 🚀Future Enhancements
 
-	Online payment gateway integration
 
-	Real-time GPS tracking
+## 🚀Future Enhancements
 
-	Customer ratings and reviews
+ * Online payment gateway integration
 
-	Discount coupons and offers
+ * Real-time GPS tracking
 
-	Push notifications
+ * Customer ratings and reviews
 
-	Admin analytics dashboard
+ * Discount coupons and offers
 
-### 📚 Learning Outcomes
+ * Push notifications
 
-	Full-stack application development
+ * Admin analytics dashboard
 
-	REST API design
 
-	Database modeling and ER design
 
-	Secure authentication & authorization
+## 📚 Learning Outcomes
 
-	Real-world project architecture
+ * Full-stack application development
 
-### 📌 Conclusion
+ * REST API design
 
-	HungryHub is a complete online food ordering and delivery system that demonstrates the practical implementation 
-	of modern software development concepts. It serves as an excellent academic project, portfolio project, and
-	foundation for future enhancements, closely resembling real-world food delivery platforms such as 
-	Swiggy, Zomato, and Uber Eats.
+ * Database modeling and ER design
+
+ * Secure authentication & authorization
+
+ * Real-world project architecture
+
+---
+
+## 📌 Conclusion
+
+ HungryHub is a complete online food ordering and delivery system that demonstrates the practical implementation 
+ of modern software development concepts. It serves as an excellent academic project, portfolio project, and
+ foundation for future enhancements, closely resembling real-world food delivery platforms such as 
+ Swiggy, Zomato, and Uber Eats.
 	
 		
 
