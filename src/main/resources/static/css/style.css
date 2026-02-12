@@ -42,6 +42,17 @@ html, body {
 
   --shadow-sm: 0 6px 18px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 20px 40px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 30px 80px rgba(15, 23, 42, 0.28);
+
+  /* layout breakpoints */
+  --bp-desktop: 1200px;
+  --bp-laptop: 1024px;
+  --bp-tablet: 768px;
+  --bp-mobile: 600px;
+
+  /* animation helpers */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 220ms cubic-bezier(.2,.9,.3,1);
 }
 
 /* ---------- BODY ---------- */
@@ -93,9 +104,87 @@ a:hover {
   gap: 18px;
 }
 
+.nav-toggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: none;
+  transition:
+    background-color var(--transition-fast, 150ms ease-out),
+    box-shadow var(--transition-fast, 150ms ease-out),
+    transform var(--transition-fast, 150ms ease-out);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 999px;
+  background: #0f172a;
+  transition:
+    transform 160ms ease,
+    opacity 160ms ease,
+    background-color 160ms ease;
+}
+
+.nav-toggle span + span {
+  margin-top: 4px;
+}
+
+.navbar.nav-open .nav-toggle {
+  background: transparent;
+}
+
+.navbar.nav-open .nav-toggle span {
+  background: #0f172a;
+}
+
+.navbar.nav-open .nav-toggle span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.navbar.nav-open .nav-toggle span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar.nav-open .nav-toggle span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
 .nav-links a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
   font-weight: 600;
   color: #334155;
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast, 150ms ease-out),
+    color var(--transition-fast, 150ms ease-out),
+    box-shadow var(--transition-fast, 150ms ease-out),
+    transform var(--transition-fast, 150ms ease-out);
+}
+
+.nav-links a:hover {
+  background-color: #e5edff;
+  color: #1d4ed8;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+  transform: translateY(-1px);
+}
+
+.nav-links a:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.18);
 }
 
 /* ---------- BUTTONS ---------- */
@@ -3517,6 +3606,103 @@ textarea,
 }
 
 /* =========================================================
+   PAGE THEMES – COLORFUL, ROLE-BASED BACKGROUNDS
+========================================================= */
+
+/* ---------- HOME (marketing) ---------- */
+.page-home {
+  background:
+    radial-gradient(900px 500px at 0% 0%, rgba(59,130,246,0.12), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(251,191,36,0.16), transparent 55%),
+    linear-gradient(180deg, #f9fafb 0%, #ffffff 40%, #f8fafc 100%);
+}
+
+.page-home .hero {
+  position: relative;
+  background: transparent;
+}
+
+.page-home .hero::before {
+  content: "";
+  position: absolute;
+  inset: -40px;
+  background-image: url("/images/app.jpeg");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.06;
+  filter: saturate(1.2);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* ---------- USER MENU (discovery) ---------- */
+.page-user-menu {
+  background:
+    radial-gradient(900px 500px at 0% 100%, rgba(34,197,94,0.16), transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, rgba(239,68,68,0.12), transparent 55%),
+    linear-gradient(180deg, #fefce8 0%, #f9fafb 40%, #ffffff 100%);
+}
+
+.page-user-menu .menu-hero {
+  background: transparent;
+}
+
+/* ---------- USER CART (checkout) ---------- */
+.page-user-cart {
+  background:
+    radial-gradient(900px 500px at 0% 0%, rgba(56,189,248,0.18), transparent 55%),
+    radial-gradient(900px 500px at 100% 100%, rgba(34,197,94,0.16), transparent 55%),
+    linear-gradient(180deg, #eff6ff 0%, #f9fafb 50%, #ffffff 100%);
+}
+
+.page-user-cart .cart-hero {
+  background: transparent;
+}
+
+/* ---------- USER DASHBOARD (personal space) ---------- */
+.page-user-dashboard {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(59,130,246,0.14), transparent 55%),
+    radial-gradient(circle at 100% 100%, rgba(244,114,182,0.12), transparent 55%),
+    linear-gradient(180deg, #fdf2ff 0%, #f9fafb 45%, #ffffff 100%);
+}
+
+.page-user-dashboard .dashboard-hero {
+  background: transparent;
+}
+
+/* ---------- ADMIN DASHBOARD (enterprise feel) ---------- */
+.page-admin-dashboard {
+  background:
+    radial-gradient(900px 500px at 0% 0%, rgba(15,23,42,0.22), transparent 60%),
+    radial-gradient(900px 500px at 100% 100%, rgba(37,99,235,0.22), transparent 60%),
+    linear-gradient(180deg, #0f172a 0%, #020617 40%, #020617 100%);
+  color: #e5e7eb;
+}
+
+.page-admin-dashboard .navbar {
+  background: transparent;
+  border-bottom-color: rgba(148,163,184,0.25);
+}
+
+.page-admin-dashboard .nav-brand,
+.page-admin-dashboard .nav-links a {
+  color: #e5e7eb;
+}
+
+.page-admin-dashboard .dashboard-hero {
+  background: rgba(15,23,42,0.7);
+}
+
+.page-admin-dashboard .dashboard-stats-card,
+.page-admin-dashboard .admin-table-wrapper,
+.page-admin-dashboard .order-card {
+  background: rgba(15,23,42,0.96);
+  border-color: rgba(148,163,184,0.35);
+  box-shadow: 0 22px 60px rgba(0,0,0,0.6);
+}
+
+/* =========================================================
    GLOBAL MODAL FIX – REQUIRED FOR ADMIN ADD ITEM
 ========================================================= */
 
@@ -3546,6 +3732,274 @@ textarea,
   box-shadow: 0 30px 70px rgba(0,0,0,0.18);
   animation: modalFadeUp 0.3s ease both;
 }
+
+
+/* =========================================================
+   GLOBAL RESPONSIVE + 3D ENHANCEMENTS
+   (SAFE OVERRIDES – APPLY AFTER ALL PAGE-SPECIFIC CSS)
+========================================================= */
+
+/* ---------- CONTAINER FLUID SCALES ---------- */
+.container {
+  max-width: var(--bp-desktop);
+  padding-inline: clamp(12px, 4vw, 32px);
+}
+
+@media (max-width: 1200px) {
+  .hero,
+  .dashboard-hero,
+  .cart-hero,
+  .orders-hero,
+  .menu-hero {
+    padding-block: 64px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .hero,
+  .dashboard-hero {
+    padding-block: 56px;
+  }
+
+  .section {
+    padding-block: 56px;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Navbar + layout switch to mobile/tablet at <= 1024px */
+@media (max-width: 1024px) {
+  body {
+    font-size: 15px;
+  }
+
+  .navbar .container {
+    position: relative;
+    height: 56px;
+    padding-block: 8px;
+    gap: 12px;
+  }
+
+  .nav-brand {
+    font-size: 1rem;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    margin-top: 4px;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+    box-shadow: 0 12px 30px rgba(15,23,42,0.12);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 16px 14px;
+    gap: 6px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 50;
+    transition:
+      max-height 220ms ease,
+      opacity 180ms ease;
+  }
+
+  .navbar.nav-open .nav-links {
+    max-height: 260px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links a {
+    width: 100%;
+    justify-content: flex-start;
+    font-size: 0.92rem;
+    padding-inline: 10px;
+  }
+
+  .hero-inner,
+  .dashboard-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .hero-title,
+  .dashboard-title {
+    font-size: clamp(1.8rem, 6vw, 2.2rem);
+  }
+
+  .hero-actions,
+  .hero-stats,
+  .dashboard-quick-actions {
+    flex-wrap: wrap;
+  }
+
+  .dashboard-stats-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .section {
+    padding-block: 44px;
+  }
+
+  .hero {
+    padding-block: 48px 36px;
+  }
+
+  .cart-hero,
+  .orders-hero,
+  .menu-hero,
+  .dashboard-hero {
+    border-radius: 0 0 22px 22px;
+  }
+
+  .hero-card,
+  .dashboard-stats-card,
+  .cart-summary-card,
+  .order-card,
+  .admin-table-wrapper,
+  .payment-card {
+    padding: 18px;
+  }
+}
+
+/* ---------- FLEXIBLE GRID UTILITIES ---------- */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+}
+
+.grid-auto-fit-lg {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 22px;
+}
+
+/* You can apply .grid-auto-fit / .grid-auto-fit-lg
+   to any list of cards for automatic responsive columns */
+
+/* ---------- 3D INTERACTIVE SURFACES ---------- */
+.interactive-3d {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.card-3d {
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal),
+    background-position 280ms ease-out;
+  background-position: 0 0;
+  background-size: 140% 140%;
+}
+
+@media (hover: hover) {
+  .card-3d:hover {
+    transform: translateY(-6px) rotateX(4deg) rotateY(-4deg);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* apply subtle 3D by default to main cards */
+.hero-card,
+.menu-item,
+.cart-summary-card,
+.order-card,
+.admin-food-card,
+.payment-card,
+.dashboard-stats-card {
+  transform-style: preserve-3d;
+  transition:
+    transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+}
+
+@media (hover: hover) {
+  .hero-card:hover,
+  .menu-item:hover,
+  .cart-summary-card:hover,
+  .order-card:hover,
+  .admin-food-card:hover,
+  .payment-card:hover,
+  .dashboard-stats-card:hover {
+    transform: translateY(-6px) translateZ(0);
+    box-shadow: var(--shadow-lg);
+  }
+}
+
+/* ---------- LIGHT PARALLAX HOVER FOR IMAGES ---------- */
+.card-media-zoom img {
+  transform-origin: center center;
+  transition:
+    transform 260ms cubic-bezier(.2,.9,.3,1),
+    filter 260ms ease-out;
+}
+
+@media (hover: hover) {
+  .card-media-zoom:hover img {
+    transform: scale(1.06) translate3d(0, -4px, 0);
+    filter: saturate(1.08);
+  }
+}
+
+/* ---------- REAL-TIME FEEL: SOFT GLOW PULSE FOR PRIMARY CTA ---------- */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(circle at 10% 0%, rgba(255,255,255,0.35), transparent 55%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-fast);
+}
+
+@media (hover: hover) {
+  .btn-primary:hover::before {
+    opacity: 1;
+  }
+}
+
+/* ---------- FLOATING ICON LOOP (USED BY USER AUTH ICONS) ---------- */
+@keyframes iconFloat {
+  0%   { transform: translateY(0) translateZ(0); }
+  50%  { transform: translateY(-6px) translateZ(10px); }
+  100% { transform: translateY(0) translateZ(0); }
+}
+
+/* ---------- REDUCED MOTION SAFETY ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .card-3d,
+  .interactive-3d *,
+  .btn-primary::before {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+
+
+
+
 
 
 

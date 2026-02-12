@@ -9,12 +9,16 @@
   <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
-<body>
+<body class="page-home">
   <!-- NAV -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
       <div class="nav-brand">🍔 Food Delivery</div>
-
+      <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="nav-links" role="menubar">
         <a role="menuitem" th:href="@{/}">Home</a>
         <a role="menuitem" th:href="@{/user/menu}">Menu</a>
@@ -75,8 +79,8 @@
       </div>
 
       <!-- RIGHT -->
-      <div class="hero-right reveal">
-        <div class="hero-card" tabindex="0">
+      <div class="hero-right reveal interactive-3d">
+        <div class="hero-card card-3d" tabindex="0">
           <div class="hero-card-header">
             <div>
               <div class="hero-card-title">Live Order Preview</div>
@@ -110,20 +114,20 @@
         </p>
       </div>
 
-      <div class="feature-grid">
-        <div class="feature-card reveal">
+      <div class="feature-grid grid-auto-fit">
+        <div class="feature-card reveal card-3d">
           <div class="feature-icon orange">⏱</div>
           <h3>Lightning-fast delivery</h3>
           <p>Optimised routes ensure your food arrives hot and fast.</p>
         </div>
 
-        <div class="feature-card reveal">
+        <div class="feature-card reveal card-3d">
           <div class="feature-icon green">🥗</div>
           <h3>Quality you can trust</h3>
           <p>Partnered with verified restaurants and real customer reviews.</p>
         </div>
 
-        <div class="feature-card reveal">
+        <div class="feature-card reveal card-3d">
           <div class="feature-icon blue">📍</div>
           <h3>Live order tracking</h3>
           <p>Track your rider and get accurate ETA updates.</p>
@@ -141,6 +145,7 @@
   </footer>
 
   <!-- Scripts -->
+  <script th:src="@{/js/nav.js}"></script>
   <script th:src="@{/js/hero.js}"></script>
   <script th:src="@{/js/counters.js}"></script>
   <script th:src="@{/js/app.js}"></script>

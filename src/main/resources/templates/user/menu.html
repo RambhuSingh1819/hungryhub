@@ -6,11 +6,16 @@
     <title>Menu - Food Delivery</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="page-user-menu">
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">🍔 Food Delivery</div>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="nav-links">
                 <a th:href="@{/user/dashboard}">Dashboard</a>
                 <a th:href="@{/user/menu}">Menu</a>
@@ -54,9 +59,9 @@
             <button class="btn btn-primary" onclick="searchItems()">Search</button>
         </div>
 
-        <div class="menu-grid" id="menuGrid">
+        <div class="menu-grid grid-auto-fit-lg" id="menuGrid">
             <!-- items = list passed from controller -->
-            <div class="menu-item menu-item-animated" th:each="item : ${items}">
+            <div class="menu-item menu-item-animated card-3d card-media-zoom" th:each="item : ${items}">
                 <!-- fixed Thymeleaf expression -->
                 <img th:src="${item.imageUrl != null} ? ${item.imageUrl} : '/images/placeholder.jpg'"
                      alt="Food Item">
@@ -79,6 +84,7 @@
         </div>
     </div>
 
+    <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/menu.js}"></script>
 </body>
 </html>

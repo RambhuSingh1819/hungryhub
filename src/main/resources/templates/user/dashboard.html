@@ -9,11 +9,16 @@
     <!-- main app stylesheet (keep filename same) -->
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body class="user-body">
+<body class="user-body page-user-dashboard">
     <!-- NAVBAR -->
     <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="container">
             <div class="nav-brand">🍔 Food Delivery</div>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="nav-links" role="menubar" aria-label="Main menu">
                 <a role="menuitem" th:href="@{/user/dashboard}">Dashboard</a>
                 <a role="menuitem" th:href="@{/user/menu}">Menu</a>
@@ -48,8 +53,8 @@
                 </p>
             </div>
 
-            <div class="dashboard-hero-right" aria-hidden="false">
-                <div class="dashboard-stats-card reveal" role="region" aria-label="Today's snapshot">
+            <div class="dashboard-hero-right interactive-3d" aria-hidden="false">
+                <div class="dashboard-stats-card reveal card-3d" role="region" aria-label="Today's snapshot">
                     <h3>Today’s snapshot</h3>
 
                     <div class="dashboard-stats-grid" role="list">
@@ -86,9 +91,9 @@
                 <a th:href="@{/user/menu}" class="dashboard-view-all-link">View full menu →</a>
             </div>
 
-            <div class="menu-grid reveal-grid" aria-live="polite">
+            <div class="menu-grid reveal-grid grid-auto-fit-lg" aria-live="polite">
                 <!-- -> Thymeleaf loop: preserve your variable names (items) -->
-                <div class="menu-item menu-item-animated reveal" th:each="item : ${items}">
+                <div class="menu-item menu-item-animated reveal card-3d card-media-zoom" th:each="item : ${items}">
                     <img th:src="${item.imageUrl != null ? @{${item.imageUrl}} : @{/images/app.jpeg}}" src="/images/app.jpeg" alt="" />
                     <div style="padding:12px;">
                         <h3 th:text="${item.name}">Item Name</h3>
@@ -107,7 +112,7 @@
                 </div>
 
                 <!-- Fallback sample items when ${items} is empty (optional) -->
-                <div class="menu-item menu-item-animated reveal" th:if="${items == null or #lists.isEmpty(items)}">
+                <div class="menu-item menu-item-animated reveal card-3d card-media-zoom" th:if="${items == null or #lists.isEmpty(items)}">
                     <img src="/images/app.jpeg" alt="Sample item"/>
                     <div style="padding:12px;">
                         <h3>Spicy Paneer Wrap</h3>
@@ -130,6 +135,7 @@
     </footer>
 
     <!-- Scripts: user-dashboard.js (keeps same name), hero.js and app.js remain unchanged -->
+    <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/user-dashboard.js}"></script>
     <script th:src="@{/js/hero.js}"></script>
     <script th:src="@{/js/app.js}"></script>

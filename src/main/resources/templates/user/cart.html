@@ -6,17 +6,23 @@
 <title>Cart - Food Delivery</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="page-user-cart">
 
 	<!-- NAVBAR -->
 	<nav class="navbar">
 		<div class="container">
 			<div class="nav-brand">🍔 Food Delivery</div>
+			<button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+				<span></span>
+				<span></span>
+				<span></span>
+			</button>
 			<div class="nav-links">
-				<a th:href="@{/user/dashboard}">Dashboard</a> <a
-					th:href="@{/user/menu}">Menu</a> <a th:href="@{/user/cart}">Cart</a>
-				<a th:href="@{/user/orders}">My Orders</a> <a
-					th:href="@{/user/logout}">Logout</a>
+				<a th:href="@{/user/dashboard}">Dashboard</a>
+				<a th:href="@{/user/menu}">Menu</a>
+				<a th:href="@{/user/cart}">Cart</a>
+				<a th:href="@{/user/orders}">My Orders</a>
+				<a th:href="@{/user/logout}">Logout</a>
 			</div>
 		</div>
 	</nav>
@@ -43,8 +49,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="cart-hero-right">
-				<div class="cart-hero-card">
+			<div class="cart-hero-right interactive-3d">
+				<div class="cart-hero-card card-3d">
 					<span class="cart-hero-chip">Secure Checkout</span>
 					<p>🔒 Powered by Razorpay · UPI / Cards / Netbanking</p>
 					<p class="cart-hero-note">You’ll only be charged after
@@ -62,7 +68,7 @@
 			<!-- Items in Cart -->
 			<div class="cart-items"
 				th:if="${cart.items != null and !cart.items.isEmpty()}">
-				<div class="cart-item cart-item-animated"
+				<div class="cart-item cart-item-animated card-3d card-media-zoom"
 					th:each="item : ${cart.items}">
 					<img
 						th:src="${item.foodItem.imageUrl != null ? item.foodItem.imageUrl : '/images/placeholder.jpg'}"
@@ -104,7 +110,7 @@
 		<!-- Cart Summary Sidebar -->
 		<aside class="cart-summary-wrapper"
 			th:if="${cart.items != null and !cart.items.isEmpty()}">
-			<div class="cart-summary-card">
+			<div class="cart-summary-card card-3d">
 				<h3>Order Summary</h3>
 				<div class="cart-summary-row">
 					<span>Items total</span> <span th:text="'₹' + ${total}">₹0</span>
@@ -132,6 +138,7 @@
 	<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 	<!-- cart.js for qty/remove/checkout/payment -->
+	<script th:src="@{/js/nav.js}"></script>
 	<script th:src="@{/js/cart.js}"></script>
 
 </body>

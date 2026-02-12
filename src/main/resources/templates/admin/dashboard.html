@@ -6,11 +6,16 @@
     <title>Admin Dashboard - Food Delivery</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
-<body>
+<body class="page-admin-dashboard">
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">🍔 Admin Panel</div>
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <div class="nav-links">
                 <a th:href="@{/admin/dashboard}">Dashboard</a>
                 <a th:href="@{/admin/food-items}">Food Items</a>
@@ -164,6 +169,7 @@
         </div>
     </div>
 
+    <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/admin-dashboard.js}"></script>
 </body>
 </html>
