@@ -112,3 +112,39 @@ function addToCart(itemId) {
             showMenuToast("Error adding to cart", "error");
         });
 }
+
+// ---------- CATEGORY CHIP FILTERING ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const chips = document.querySelectorAll(".category-chip");
+    const menuItems = document.querySelectorAll(".menu-item");
+
+    chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            // Remove active class from all chips
+            chips.forEach(c => c.classList.remove("active"));
+            // Add active class to clicked chip
+            chip.classList.add("active");
+
+            const category = chip.textContent.trim().toLowerCase();
+
+            menuItems.forEach(item => {
+                const itemCategory = (item.getAttribute("data-category") || "").trim().toLowerCase();
+
+                // If 'all', show everything. Otherwise match category name.
+                // Handle plural matches (e.g. 'burgers' matches 'burger', 'desserts' matches 'dessert')
+                const isMatch = category === "all" || 
+                                itemCategory === category || 
+                                itemCategory === category.replace(/s$/, "") ||
+                                category === itemCategory.replace(/s$/, "") ||
+                                (category === "indian" && (itemCategory.includes("indian") || itemCategory === "curry" || itemCategory === "paneer"));
+
+                if (isMatch) {
+                    item.style.display = "";
+                    item.style.animation = "menuFadeUp 0.35s cubic-bezier(.2,.9,.3,1) both";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    });
+});

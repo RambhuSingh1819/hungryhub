@@ -2,6 +2,7 @@ package com.fooddelivery.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,11 @@ public interface FoodItemRepository extends JpaRepository<FoodItem, Long> {
            "(LOWER(f.name) LIKE LOWER(CONCAT('%', :query, '%')) OR " +
            "LOWER(f.description) LIKE LOWER(CONCAT('%', :query, '%')))")
     List<FoodItem> searchAvailableItems(@Param("query") String query);
+
+    @Query("SELECT f FROM FoodItem f LEFT JOIN OrderItem oi ON oi.foodItem = f " +
+           "WHERE f.available = true " +
+           "GROUP BY f " +
+           "ORDER BY COALESCE(SUM(oi.quantity), 0) DESC, f.id ASC")
+    List<FoodItem> findTopPopularItems(Pageable pageable);
 }
+

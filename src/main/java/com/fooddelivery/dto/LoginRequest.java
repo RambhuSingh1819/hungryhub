@@ -12,7 +12,7 @@ public class LoginRequest {
        phoneNumber will NOT be used for login anymore.
        It is kept only as optional unused profile info.
     --------------------------------------------------------- */
-    private String phoneNumber;
+    //private String phoneNumber;
 
     // Admin login still works with adminId + password
     private String adminId;

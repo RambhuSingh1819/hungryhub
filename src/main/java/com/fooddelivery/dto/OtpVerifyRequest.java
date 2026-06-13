@@ -12,7 +12,7 @@ public class OtpVerifyRequest {
        phoneNumber is no longer used for OTP verification.
        It's kept only as optional unused information.
     ------------------------------------------------------- */
-    private String phoneNumber;
+   // private String phoneNumber;
 
     private String otp;
 

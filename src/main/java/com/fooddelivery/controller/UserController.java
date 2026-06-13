@@ -67,7 +67,19 @@ public class UserController {
             return "redirect:/user/login";
         }
 
+        List<com.fooddelivery.entity.Order> userOrders = orderService.getOrdersForUser(user.getId());
+        long totalOrders = userOrders.size();
+        long ongoingOrders = userOrders.stream()
+                .filter(o -> o.getStatus() != com.fooddelivery.entity.Order.OrderStatus.DELIVERED 
+                        && o.getStatus() != com.fooddelivery.entity.Order.OrderStatus.CANCELLED)
+                .count();
+
+        List<FoodItem> popularItems = foodItemService.getTopPopularItems(5);
+
         model.addAttribute("user", user);
+        model.addAttribute("totalOrders", totalOrders);
+        model.addAttribute("ongoingOrders", ongoingOrders);
+        model.addAttribute("items", popularItems);
         return "user/dashboard";
     }
 

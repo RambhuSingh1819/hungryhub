@@ -18,6 +18,8 @@ public class RazorpayConfig {
 
     @Bean
     public RazorpayClient razorpayClient() throws RazorpayException {
-        return new RazorpayClient(keyId, keySecret);
+        String effectiveKeyId = (keyId != null && !keyId.trim().isEmpty()) ? keyId : "rzp_test_dummy";
+        String effectiveKeySecret = (keySecret != null && !keySecret.trim().isEmpty()) ? keySecret : "dummypassword";
+        return new RazorpayClient(effectiveKeyId, effectiveKeySecret);
     }
 }

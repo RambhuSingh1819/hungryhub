@@ -181,7 +181,9 @@ public class UserAuthController {
 
         otpService.createAndSendOtp(req.getEmail(), OtpType.RESET_PASSWORD);
         model.addAttribute("email", req.getEmail());
-        model.addAttribute("resetRequest", new ResetPasswordRequest());
+        ResetPasswordRequest resetReq = new ResetPasswordRequest();
+        resetReq.setEmail(req.getEmail());
+        model.addAttribute("resetRequest", resetReq);
         return "user/reset-password";
     }
 

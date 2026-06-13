@@ -332,3 +332,53 @@ if (document.getElementById('itemForm')) {
             });
     });
 }
+
+// ---------- CATEGORY CHIP & REAL-TIME SEARCH FILTERING ----------
+document.addEventListener("DOMContentLoaded", () => {
+    const chips = document.querySelectorAll(".category-chip");
+    const foodCards = document.querySelectorAll(".admin-food-card");
+    const searchInput = document.getElementById("foodSearchInput");
+
+    let activeCategory = "all";
+    let activeQuery = "";
+
+    function filterItems() {
+        foodCards.forEach(card => {
+            const name = (card.getAttribute("data-name") || "").toLowerCase();
+            const category = (card.getAttribute("data-category") || "").toLowerCase();
+
+            const matchesCategory = activeCategory === "all" || 
+                                    category === activeCategory || 
+                                    category === activeCategory.replace(/s$/, "") ||
+                                    activeCategory === category.replace(/s$/, "");
+
+            const matchesSearch = !activeQuery || 
+                                  name.includes(activeQuery) || 
+                                  category.includes(activeQuery);
+
+            if (matchesCategory && matchesSearch) {
+                card.style.display = "";
+            } else {
+                card.style.display = "none";
+            }
+        });
+    }
+
+    // Category chips click listener
+    chips.forEach(chip => {
+        chip.addEventListener("click", () => {
+            chips.forEach(c => c.classList.remove("active"));
+            chip.classList.add("active");
+            activeCategory = chip.textContent.trim().toLowerCase();
+            filterItems();
+        });
+    });
+
+    // Real-time search keyup/input listener
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            activeQuery = e.target.value.trim().toLowerCase();
+            filterItems();
+        });
+    }
+});

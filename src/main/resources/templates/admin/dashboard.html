@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard - Food Delivery</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>Admin Dashboard - HungryHub</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css(v=2)}">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+        }
+    </style>
 </head>
+
 <body class="page-admin-dashboard">
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container">
-            <div class="nav-brand">🍔 Admin Panel</div>
-            <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="nav-brand">Admin Panel</div>
             <div class="nav-links">
                 <a th:href="@{/admin/dashboard}">Dashboard</a>
                 <a th:href="@{/admin/food-items}">Food Items</a>
@@ -56,31 +64,46 @@
                 <div class="dashboard-stats-card">
                     <h3>Today at a glance</h3>
                     <div class="dashboard-stats-grid">
-                        <div class="dashboard-stat">
-                            <span class="dashboard-stat-number"
-                                  th:text="${todayOrdersCount != null ? todayOrdersCount : 0}">
-                                0
-                            </span>
-                            <span class="dashboard-stat-label">Orders</span>
+                        <div class="dashboard-stat stat-orders">
+                            <div class="stat-content">
+                                <span class="dashboard-stat-number"
+                                    th:text="${todayOrdersCount != null ? todayOrdersCount : 0}">
+                                    0
+                                </span>
+                                <span class="dashboard-stat-label">Orders</span>
+                            </div>
+                            <div class="stat-icon-wrapper">
+                                <i class="bi bi-bag-check-fill"></i>
+                            </div>
                         </div>
-                        <div class="dashboard-stat">
-                            <span class="dashboard-stat-number"
-                                  th:text="${pendingOrdersCount != null ? pendingOrdersCount : 0}">
-                                0
-                            </span>
-                            <span class="dashboard-stat-label">Pending</span>
+                        <div class="dashboard-stat stat-pending">
+                            <div class="stat-content">
+                                <span class="dashboard-stat-number"
+                                    th:text="${pendingOrdersCount != null ? pendingOrdersCount : 0}">
+                                    0
+                                </span>
+                                <span class="dashboard-stat-label">Pending</span>
+                            </div>
+                            <div class="stat-icon-wrapper">
+                                <i class="bi bi-clock-history"></i>
+                            </div>
                         </div>
-                        <div class="dashboard-stat">
-                            <span class="dashboard-stat-number"
-                                  th:text="${todayRevenue != null ? '₹' + todayRevenue : '₹0'}">
-                                ₹0
-                            </span>
-                            <span class="dashboard-stat-label">Revenue</span>
+                        <div class="dashboard-stat stat-revenue">
+                            <div class="stat-content">
+                                <span class="dashboard-stat-number"
+                                    th:text="${todayRevenue != null ? '₹' + todayRevenue : '₹0'}">
+                                    ₹0
+                                </span>
+                                <span class="dashboard-stat-label">Revenue</span>
+                            </div>
+                            <div class="stat-icon-wrapper">
+                                <i class="bi bi-currency-rupee"></i>
+                            </div>
                         </div>
                     </div>
                     <p class="dashboard-stat-note">
                         Last updated
-                        <span th:text="${#dates.format(new java.util.Date(), 'hh:mm a')}">
+                        <span th:text="${#dates.format(#dates.createNow(), 'hh:mm a')}">
                             10:30 AM
                         </span>
                     </p>
@@ -96,9 +119,11 @@
                 <div class="admin-table-title-row">
                     <h2>Recent Orders</h2>
                     <div class="admin-controls">
-                        <input type="text" id="recentOrdersSearch"
-                               class="admin-search-input"
-                               placeholder="Search by order ID or user…">
+                        <div class="search-wrapper">
+                            <i class="bi bi-search search-icon"></i>
+                            <input type="text" id="recentOrdersSearch" class="admin-search-input"
+                                placeholder="Search by order ID or user…">
+                        </div>
                     </div>
                 </div>
 
@@ -117,7 +142,8 @@
                                     </span>
                                 </div>
                             </div>
-                            <span class="order-status" th:text="${order.status}">
+                            <span th:class="'order-status status-' + ${#strings.toLowerCase(order.status)}"
+                                th:text="${order.status}">
                                 PENDING
                             </span>
                         </div>
@@ -127,7 +153,8 @@
                                 <strong>Total:</strong>
                                 <span th:text="'₹' + ${order.totalAmount}">₹0</span>
                             </p>
-                            <p th:if="${order.specialInstructions != null and !#strings.isEmpty(order.specialInstructions)}">
+                            <p
+                                th:if="${order.specialInstructions != null and !#strings.isEmpty(order.specialInstructions)}">
                                 <strong>Instructions:</strong>
                                 <span th:text="${order.specialInstructions}">
                                     No onions please
@@ -138,20 +165,19 @@
                         <div class="order-footer">
                             <p class="order-payment">
                                 <strong>Payment:</strong>
-                                <span th:if="${order.paymentStatus == 'COMPLETED'}"
-                                      class="badge badge-success">
+                                <span th:if="${order.paymentStatus == 'COMPLETED'}" class="badge badge-success">
                                     Completed
                                 </span>
                                 <span th:if="${order.paymentStatus == 'PENDING'}" class="badge badge-warning">
                                     Pending
                                 </span>
-                               
-                               <span th:if="${order.paymentStatus == 'FAILED'}" class="badge badge-danger">
+
+                                <span th:if="${order.paymentStatus == 'FAILED'}" class="badge badge-danger">
                                     Failed
                                 </span>
                             </p>
-                            <a th:href="@{/admin/orders}" class="table-action-btn">
-                                View / Manage
+                            <a th:href="@{/admin/orders}" class="btn-action-manage">
+                                View / Manage <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
                     </div>
@@ -169,7 +195,7 @@
         </div>
     </div>
 
-    <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/admin-dashboard.js}"></script>
 </body>
+
 </html>

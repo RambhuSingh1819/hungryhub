@@ -11,8 +11,8 @@ import com.fooddelivery.entity.Order;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
 
-    // Get all orders for a specific user
-    List<Order> findByUserId(Long userId);
+    // Get all orders for a specific user, newest first
+    List<Order> findByUserIdOrderByIdDesc(Long userId);
 
     // Get orders by status (for admin)
     List<Order> findAllByStatus(Order.OrderStatus status);

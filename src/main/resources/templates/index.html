@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Delivery - React Page</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>HungryHub — Online Food Ordering & Delivery</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css(v=2)}">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #f8fafc;
+        }
+    </style>
 </head>
-<body>
 
-<div id="root"></div>
+<body class="page-home">
 
-<script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <div id="root"></div>
 
-<script type="text/babel" th:src="@{/js/app.js}"></script>
+    <script th:src="@{/js/react.production.min.js}"></script>
+    <script th:src="@{/js/react-dom.production.min.js}"></script>
+    <script th:src="@{/js/babel.min.js}"></script>
+
+    <script type="text/babel" th:src="@{/js/app.js(v=3)}"></script>
 
 </body>
+
 </html>

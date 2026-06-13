@@ -83,7 +83,9 @@ public class AdminController {
         otpService.createAndSendOtp(req.getEmail(), OtpVerification.OtpType.ADMIN_RESET_PASSWORD);
 
         model.addAttribute("email", req.getEmail());
-        model.addAttribute("resetRequest", new ResetPasswordRequest());
+        ResetPasswordRequest resetReq = new ResetPasswordRequest();
+        resetReq.setEmail(req.getEmail());
+        model.addAttribute("resetRequest", resetReq);
 
         return "admin/reset-password";
     }
@@ -319,6 +321,46 @@ public class AdminController {
 
     // ================== ADD / UPDATE / DELETE FOOD ITEMS ==================
 
+    private String getAutoFoodImageUrl(String name, String category) {
+        String searchStr = ((name != null ? name : "") + " " + (category != null ? category : "")).toLowerCase();
+        
+        if (searchStr.contains("pizza")) {
+            return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("burger")) {
+            return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("coca-cola") || searchStr.contains("coca_cola") || searchStr.contains("coke") || searchStr.contains("pepsi") || searchStr.contains("sprite") || searchStr.contains("fanta") || searchStr.contains("cola") || searchStr.contains("soda") || searchStr.contains("cold drink")) {
+            return "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("egg roll") || searchStr.contains("spring roll") || searchStr.contains("egg_roll") || searchStr.contains("spring_roll")) {
+            return "https://images.unsplash.com/photo-1606755962773-d324e0a13086?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("paneer") || searchStr.contains("tikka") || searchStr.contains("masala") || searchStr.contains("curry") || searchStr.contains("dal") || searchStr.contains("indian")) {
+            return "https://images.unsplash.com/photo-1565557623262-b51c2513a641?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("wrap") || searchStr.contains("roll") || searchStr.contains("shawarma")) {
+            return "https://images.unsplash.com/photo-1562059390-a761a084768e?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("juice")) {
+            return "https://images.unsplash.com/photo-1600271886742-f049cd451bba?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("shake") || searchStr.contains("milkshake") || searchStr.contains("smoothie")) {
+            return "https://images.unsplash.com/photo-1572490122747-3968b75cc699?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("tea") || searchStr.contains("chai")) {
+            return "https://images.unsplash.com/photo-1576092768241-dec231879fc3?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("coffee") || searchStr.contains("drink") || searchStr.contains("beverage")) {
+            return "https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("cake") || searchStr.contains("lava") || searchStr.contains("dessert") || searchStr.contains("sweet") || searchStr.contains("ice cream") || searchStr.contains("pastry") || searchStr.contains("waffle") || searchStr.contains("donut") || searchStr.contains("brownie")) {
+            return "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("noodle") || searchStr.contains("chowmein") || searchStr.contains("ramen") || searchStr.contains("pasta") || searchStr.contains("spaghetti")) {
+            return "https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("rice") || searchStr.contains("biryani") || searchStr.contains("pulao") || searchStr.contains("fried rice")) {
+            return "https://images.unsplash.com/photo-1633945274405-b6c8069047b0?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("salad")) {
+            return "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("sandwich") || searchStr.contains("toast")) {
+            return "https://images.unsplash.com/photo-1528735602780-2552fd46c7af?q=80&w=600&auto=format&fit=crop";
+        } else if (searchStr.contains("french fries") || searchStr.contains("fries") || searchStr.contains("potato") || searchStr.contains("nugget") || searchStr.contains("snack")) {
+            return "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?q=80&w=600&auto=format&fit=crop";
+        } else {
+            return "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop";
+        }
+    }
+
     @PostMapping("/food-items/add")
     @ResponseBody
     public ResponseEntity<Map<String, Object>> addFoodItem(
@@ -343,6 +385,10 @@ public class AdminController {
             item.setDescription(description);
             item.setPrice(price);
             item.setCategory(category);
+            
+            if (imageUrl == null || imageUrl.isBlank()) {
+                imageUrl = getAutoFoodImageUrl(name, category);
+            }
             item.setImageUrl(imageUrl);
             item.setAvailable(true);
 
@@ -390,8 +436,10 @@ public class AdminController {
             if (category != null) {
                 item.setCategory(category);
             }
-            if (imageUrl != null) {
+            if (imageUrl != null && !imageUrl.isBlank()) {
                 item.setImageUrl(imageUrl);
+            } else if (imageUrl == null || imageUrl.isBlank()) {
+                item.setImageUrl(getAutoFoodImageUrl(name, category));
             }
             if (available != null) {
                 item.setAvailable(available);

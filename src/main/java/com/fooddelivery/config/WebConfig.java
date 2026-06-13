@@ -10,7 +10,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        String absolutePath = "file:/Users/rambhusingh/Desktop/Spring-Boot(Durgesh sir)/FirstSTSProject/uploads/";
+        String userDir = System.getProperty("user.dir");
+        String absolutePath = "file:" + userDir + "/uploads/";
 
         registry.addResourceHandler("/uploads/**")
                 .addResourceLocations(absolutePath);

@@ -1,19 +1,30 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Food Delivery — Home</title>
-
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;900&display=swap" rel="stylesheet">
   <!-- Main stylesheet -->
   <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <style>
+    body {
+      font-family: 'Outfit', sans-serif;
+    }
+  </style>
 </head>
 
 <body class="page-home">
   <!-- NAV -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
-      <div class="nav-brand">🍔 Food Delivery</div>
+      <div class="nav-brand">Food Delivery</div>
       <button class="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
         <span></span>
         <span></span>
@@ -38,9 +49,9 @@
       <!-- LEFT -->
       <div class="hero-left reveal">
         <div class="hero-badges" aria-hidden="true">
-          <span class="hero-badge">🚀 30 min avg delivery</span>
-          <span class="hero-badge">🔥 Handpicked local favourites</span>
-          <span class="hero-badge">💳 Secure online payment</span>
+          <span class="hero-badge">30 min avg delivery</span>
+          <span class="hero-badge">Handpicked local favourites</span>
+          <span class="hero-badge">Secure online payment</span>
         </div>
 
         <h1 class="hero-title">
@@ -90,8 +101,8 @@
           </div>
 
           <div class="hero-card-items">
-            • Cheesy Veg Pizza<br/>
-            • Classic Chicken Burger<br/>
+            • Cheesy Veg Pizza<br />
+            • Classic Chicken Burger<br />
             • Cold Coffee
           </div>
 
@@ -148,6 +159,6 @@
   <script th:src="@{/js/nav.js}"></script>
   <script th:src="@{/js/hero.js}"></script>
   <script th:src="@{/js/counters.js}"></script>
-  <script th:src="@{/js/app.js}"></script>
 </body>
+
 </html>

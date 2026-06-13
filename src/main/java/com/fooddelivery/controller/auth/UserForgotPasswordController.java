@@ -28,6 +28,12 @@ public class UserForgotPasswordController {
     public String verifyOtp(
             @ModelAttribute("resetRequest") ResetPasswordRequest req,Model model) {
 
+        if (req.getNewPassword() == null || req.getConfirmPassword() == null || !req.getNewPassword().equals(req.getConfirmPassword())) {
+            model.addAttribute("error", "Passwords do not match");
+            model.addAttribute("resetRequest", req);
+            return "user/reset-password";
+        }
+
         boolean valid = otpService.verifyOtp(
                 req.getEmail(),
                 req.getOtp(),

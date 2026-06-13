@@ -6,6 +6,7 @@ function showMessage(message, type) {
 
     messageDiv.textContent = message;
     messageDiv.className = 'message ' + type;
+    messageDiv.style.display = 'block';
 
     messageDiv.style.animation = 'fadeInUp 0.35s ease-out';
     setTimeout(() => messageDiv.style.animation = '', 400);
@@ -16,6 +17,7 @@ function showMessage(message, type) {
     setTimeout(() => {
         messageDiv.textContent = '';
         messageDiv.className = 'message';
+        messageDiv.style.display = 'none';
     }, 5000);
 }
 
