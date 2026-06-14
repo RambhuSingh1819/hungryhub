@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 key: data.razorpayKeyId,
                 amount: data.amountInPaise,
                 currency: data.currency,
-                name: "Food Delivery - Admin Subscription",
+                name: "Hungry-hub - Admin Subscription",
                 description: "Admin monthly subscription",
                 order_id: data.razorpayOrderId,
                 handler: async function (response) {

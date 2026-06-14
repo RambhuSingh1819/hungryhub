@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", function () {
         key: rpData.razorpayKeyId,
         amount: rpData.amountInPaise,
         currency: rpData.currency,
-        name: "Food Delivery App",
+        name: "Hungry-hub App",
         order_id: rpData.razorpayOrderId,
 
         handler: async function (response) {

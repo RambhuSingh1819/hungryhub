@@ -106,7 +106,7 @@ function App() {
             {/* NAVBAR */}
             <nav className="navbar" role="navigation" aria-label="Main navigation">
                 <div className="container">
-                    <div className="nav-brand">🍔 Food Delivery</div>
+                    <div className="nav-brand">Hungry-hub</div>
                     <div className="nav-links" role="menubar" aria-hidden="false">
                         <a href="/">Home</a>
                         <a href="/user/menu">Menu</a>
