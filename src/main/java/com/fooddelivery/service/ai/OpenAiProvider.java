@@ -53,15 +53,15 @@ public class OpenAiProvider implements AiProvider {
     public AiFoodSuggestionResponse getFoodSuggestion(String name, String category) {
         try {
             String systemPrompt = """
-                You are helping generate menu content for a food delivery admin panel.
-                Respond ONLY in JSON with:
+                    You are helping generate menu content for a food delivery admin panel.
+                    Respond ONLY in JSON with:
 
-                {
-                  "description": "short tasty description",
-                  "variants": ["variant1", "variant2"],
-                  "imagePrompt": "image generation prompt"
-                }
-                """;
+                    {
+                      "description": "short tasty description",
+                      "variants": ["variant1", "variant2"],
+                      "imagePrompt": "image generation prompt"
+                    }
+                    """;
 
             String userContent = "Food name: " + name + " | Category: " + category;
 
@@ -76,8 +76,7 @@ public class OpenAiProvider implements AiProvider {
             if (json.has("variants") && json.path("variants").isArray()) {
                 variants = objectMapper.convertValue(
                         json.path("variants"),
-                        objectMapper.getTypeFactory().constructCollectionType(List.class, String.class)
-                );
+                        objectMapper.getTypeFactory().constructCollectionType(List.class, String.class));
             }
 
             if (description == null || description.isBlank()) {
