@@ -70,7 +70,7 @@ public class UserController {
         List<com.fooddelivery.entity.Order> userOrders = orderService.getOrdersForUser(user.getId());
         long totalOrders = userOrders.size();
         long ongoingOrders = userOrders.stream()
-                .filter(o -> o.getStatus() != com.fooddelivery.entity.Order.OrderStatus.DELIVERED 
+                .filter(o -> o.getStatus() != com.fooddelivery.entity.Order.OrderStatus.DELIVERED
                         && o.getStatus() != com.fooddelivery.entity.Order.OrderStatus.CANCELLED)
                 .count();
 

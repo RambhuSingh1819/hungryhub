@@ -13,14 +13,14 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     /*
      * ---------------------- PHONE LOOKUPS DISABLED ----------------------
-     * 
+     *
      * Optional<User> findByPhoneNumber(String phoneNumber);
-     * 
+     *
      * boolean existsByPhoneNumber(String phoneNumber);
-     * 
+     *
      * // For login or OTP using phone — now disabled
      * Optional<User> findByEmailOrPhoneNumber(String email, String phoneNumber);
-     * 
+     *
      * ----------------------------------------------------------------------
      */
 

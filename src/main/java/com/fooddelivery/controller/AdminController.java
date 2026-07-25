@@ -323,7 +323,7 @@ public class AdminController {
 
     private String getAutoFoodImageUrl(String name, String category) {
         String searchStr = ((name != null ? name : "") + " " + (category != null ? category : "")).toLowerCase();
-        
+
         if (searchStr.contains("pizza")) {
             return "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?q=80&w=600&auto=format&fit=crop";
         } else if (searchStr.contains("burger")) {
@@ -385,7 +385,7 @@ public class AdminController {
             item.setDescription(description);
             item.setPrice(price);
             item.setCategory(category);
-            
+
             if (imageUrl == null || imageUrl.isBlank()) {
                 imageUrl = getAutoFoodImageUrl(name, category);
             }

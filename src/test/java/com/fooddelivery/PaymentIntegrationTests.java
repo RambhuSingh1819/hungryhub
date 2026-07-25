@@ -1,10 +1,14 @@
 package com.fooddelivery;
 
-import java.math.BigDecimal;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +30,6 @@ import com.fooddelivery.repository.FoodItemRepository;
 import com.fooddelivery.repository.OrderRepository;
 import com.fooddelivery.repository.PaymentRepository;
 import com.fooddelivery.repository.UserRepository;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(properties = {
     "spring.datasource.driver-class-name=org.h2.Driver",
@@ -102,7 +100,7 @@ public class PaymentIntegrationTests {
 
         String orderResponseContent = orderResult.getResponse().getContentAsString();
         Map<String, Object> orderResponse = objectMapper.readValue(orderResponseContent, Map.class);
-        
+
         assertTrue((Boolean) orderResponse.get("success"));
         String appOrderId = (String) orderResponse.get("orderId");
         assertNotNull(appOrderId);
