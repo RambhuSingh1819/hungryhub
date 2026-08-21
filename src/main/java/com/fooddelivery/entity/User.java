@@ -61,6 +61,7 @@ public class User {
     --------------------------------------------------------------------------- */
 
     // phoneVerified removed from logic, kept false by default
+    @Builder.Default
     private boolean phoneVerified = false;
 
     @Builder.Default
@@ -73,6 +74,7 @@ public class User {
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Builder.Default
     private List<Order> orders = new ArrayList<>();
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

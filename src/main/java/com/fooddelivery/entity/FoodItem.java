@@ -43,6 +43,7 @@ public class FoodItem {
 
     private String imageUrl;
 
+    @Builder.Default
     private boolean available = true;
 
     private LocalDateTime createdAt;

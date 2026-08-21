@@ -50,6 +50,7 @@ public class Admin {
 
     private String fullName;
 
+    @Builder.Default
     private boolean emailVerified = false;
 
     /* ---------------------- PHONE VERIFIED DISABLED ----------------------
@@ -57,11 +58,13 @@ public class Admin {
     ------------------------------------------------------------------------ */
 
     // Always false, not used anywhere in logic
+    @Builder.Default
     private boolean phoneVerified = false;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
+    @Builder.Default
     private boolean active = true;
 
     private boolean paid;                 // kya admin ne pay kiya hai?

@@ -11,9 +11,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class FoodDeliveryApplication {
 
     public static void main(String[] args) {
-    	System.out.println("USERNAME = " + System.getenv("username"));
-    	System.out.println("PASSWORD = " + System.getenv("password"));
+        System.out.println("USERNAME = " + System.getenv("username"));
+        System.out.println("PASSWORD = " + System.getenv("password"));
         SpringApplication.run(FoodDeliveryApplication.class, args);
     }
 }
-
