@@ -159,7 +159,7 @@
 
     // Find the button for some micro-feedback
     var button = document.querySelector('button[data-item-id="' + itemId + '"]') ||
-                 document.querySelector('button[onclick*="' + itemId + '"]');
+      document.querySelector('button[onclick*="' + itemId + '"]');
 
     var oldText = null;
     if (button) {
