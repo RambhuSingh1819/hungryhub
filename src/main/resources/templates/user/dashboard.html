@@ -114,7 +114,9 @@
             <div class="menu-grid reveal-grid grid-auto-fit-lg" aria-live="polite">
                 <!-- -> Thymeleaf loop: preserve your variable names (items) -->
                 <div class="menu-item menu-item-animated reveal card-3d card-media-zoom" th:each="item : ${items}">
-                    <img th:src="${item.imageUrl != null ? item.imageUrl : '/images/app.jpeg'}" src="/images/app.jpeg"
+                    <img th:src="${item.imageUrl != null ? item.imageUrl : '/images/app.jpeg'}"
+                         onerror="this.onerror=null;this.src='/images/app.jpeg';"
+                         src="/images/app.jpeg"
                         alt="" />
                     <div style="padding:12px;">
                         <h3 th:text="${item.name}">Item Name</h3>

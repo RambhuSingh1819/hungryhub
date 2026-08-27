@@ -76,10 +76,19 @@ public class UserController {
 
         List<FoodItem> popularItems = foodItemService.getTopPopularItems(5);
 
+        Cart cart = cartService.getOrCreateCart(user);
+        int cartCount = 0;
+        if (cart != null && cart.getItems() != null) {
+            for (CartItem ci : cart.getItems()) {
+                cartCount += (ci.getQuantity() != null ? ci.getQuantity() : 0);
+            }
+        }
+
         model.addAttribute("user", user);
         model.addAttribute("totalOrders", totalOrders);
         model.addAttribute("ongoingOrders", ongoingOrders);
         model.addAttribute("items", popularItems);
+        model.addAttribute("cartCount", cartCount);
         return "user/dashboard";
     }
 
@@ -132,18 +141,71 @@ public class UserController {
         return "user/cart";
     }
 
-    // Add-to-cart endpoint used by menu.html (POST /user/cart/add)
+    // Add-to-cart endpoint supporting both HTML Form redirects and AJAX JSON requests (foodId or itemId parameter)
     @PostMapping("/cart/add")
-    public String addToCart(@RequestParam("foodId") Long foodId,
-                            HttpSession session) {
+    public ResponseEntity<?> addToCart(
+            @RequestParam(value = "foodId", required = false) Long foodIdParam,
+            @RequestParam(value = "itemId", required = false) Long itemIdParam,
+            @RequestParam(value = "quantity", defaultValue = "1") Integer quantity,
+            HttpSession session,
+            jakarta.servlet.http.HttpServletRequest request) {
 
         User user = (User) session.getAttribute("user");
+        Long targetFoodId = foodIdParam != null ? foodIdParam : itemIdParam;
+
+        String accept = request.getHeader("Accept");
+        String requestedWith = request.getHeader("X-Requested-With");
+        boolean isAjax = "XMLHttpRequest".equalsIgnoreCase(requestedWith) ||
+                         (accept != null && accept.contains("application/json")) ||
+                         (accept != null && !accept.contains("text/html"));
+
         if (user == null) {
-            return "redirect:/user/login";
+            if (isAjax) {
+                Map<String, Object> res = new HashMap<>();
+                res.put("success", false);
+                res.put("message", "Please login first to add items to cart.");
+                res.put("redirect", "/user/login");
+                return ResponseEntity.status(401).body(res);
+            }
+            return ResponseEntity.status(302).header("Location", "/user/login").build();
         }
 
-        cartService.addItemToCart(user, foodId, 1);
-        return "redirect:/user/cart";
+        if (targetFoodId == null) {
+            if (isAjax) {
+                Map<String, Object> res = new HashMap<>();
+                res.put("success", false);
+                res.put("message", "Invalid food item ID");
+                return ResponseEntity.badRequest().body(res);
+            }
+            return ResponseEntity.status(302).header("Location", "/user/cart").build();
+        }
+
+        try {
+            cartService.addItemToCart(user, targetFoodId, quantity != null ? quantity : 1);
+            if (isAjax) {
+                Cart cart = cartService.getOrCreateCart(user);
+                int totalItemsCount = 0;
+                if (cart != null && cart.getItems() != null) {
+                    for (CartItem ci : cart.getItems()) {
+                        totalItemsCount += (ci.getQuantity() != null ? ci.getQuantity() : 0);
+                    }
+                }
+                Map<String, Object> res = new HashMap<>();
+                res.put("success", true);
+                res.put("message", "Item added to cart successfully!");
+                res.put("cartCount", totalItemsCount);
+                return ResponseEntity.ok(res);
+            }
+            return ResponseEntity.status(302).header("Location", "/user/cart").build();
+        } catch (Exception e) {
+            if (isAjax) {
+                Map<String, Object> res = new HashMap<>();
+                res.put("success", false);
+                res.put("message", e.getMessage() != null ? e.getMessage() : "Failed to add item to cart.");
+                return ResponseEntity.badRequest().body(res);
+            }
+            return ResponseEntity.status(302).header("Location", "/user/cart").build();
+        }
     }
 
     // ---------- CART AJAX: UPDATE QUANTITY ----------

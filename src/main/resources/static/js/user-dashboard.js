@@ -14,9 +14,21 @@
       if (!toast) {
         toast = document.createElement('div');
         toast.id = 'userToast';
+        toast.style.position = 'fixed';
+        toast.style.top = '20px';
+        toast.style.right = '20px';
+        toast.style.zIndex = '2000';
+        toast.style.padding = '12px 24px';
+        toast.style.borderRadius = '8px';
+        toast.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        toast.style.fontSize = '14px';
+        toast.style.fontWeight = '600';
+        toast.style.transition = 'all 0.3s ease';
         document.body.appendChild(toast);
       }
       toast.className = 'message ' + (type === 'error' ? 'error' : 'success');
+      toast.style.backgroundColor = type === 'error' ? '#ef4444' : '#10b981';
+      toast.style.color = '#ffffff';
       toast.textContent = message;
       toast.style.opacity = '1';
       toast.style.transform = 'translateY(0)';
@@ -157,16 +169,18 @@
       bumpElement(button);
     }
 
-    // Use form-urlencoded since likely same backend expects it; adjust if your API expects JSON
-    var body = 'itemId=' + encodeURIComponent(itemId) + '&quantity=' + encodeURIComponent(quantity);
+    var body = 'foodId=' + encodeURIComponent(itemId) + '&itemId=' + encodeURIComponent(itemId) + '&quantity=' + encodeURIComponent(quantity);
 
     fetch('/user/cart/add', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      },
       body: body,
       credentials: 'same-origin'
     }).then(function (res) {
-      // try parse JSON safely
       return res.json().catch(function () { return { success: false, message: 'Invalid server response' }; });
     }).then(function (data) {
       if (button) {
